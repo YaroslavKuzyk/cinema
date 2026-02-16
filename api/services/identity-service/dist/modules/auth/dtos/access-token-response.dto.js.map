@@ -1,0 +1,1 @@
+{"version":3,"file":"access-token-response.dto.js","sourceRoot":"","sources":["../../../../src/modules/auth/dtos/access-token-response.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,6CAA8C;AAE9C,MAAa,sBAAsB;IAKjC,WAAW,CAAS;CACrB;AAND,wDAMC;AADC;IAJC,IAAA,qBAAW,EAAC;QACX,OAAO,EAAE,yCAAyC;QAClD,WAAW,EAAE,kBAAkB;KAChC,CAAC;;2DACkB"}

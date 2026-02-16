@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Cinema!</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333333;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+    }
+    .header {
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      padding: 30px;
+      text-align: center;
+    }
+    .header h1 {
+      color: #ffffff;
+      margin: 0;
+      font-size: 32px;
+      letter-spacing: 2px;
+    }
+    .content {
+      padding: 40px 30px;
+    }
+    .content h2 {
+      color: #1f2937;
+      margin-top: 0;
+    }
+    .content p {
+      color: #4b5563;
+      line-height: 1.8;
+    }
+    .button {
+      display: inline-block;
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+      color: #ffffff !important;
+      text-decoration: none;
+      border-radius: 6px;
+      margin: 20px 0;
+      font-weight: 600;
+    }
+    .features {
+      background-color: #fef2f2;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #dc2626;
+    }
+    .features ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    .features li {
+      color: #4b5563;
+      margin: 8px 0;
+    }
+    .verification-section {
+      background-color: #eff6ff;
+      border-left: 4px solid #3b82f6;
+      padding: 15px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .verification-section p {
+      margin: 5px 0;
+      color: #1e40af;
+    }
+    .footer {
+      background-color: #1f2937;
+      padding: 20px 30px;
+      text-align: center;
+      color: #9ca3af;
+      font-size: 14px;
+    }
+    .footer p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>CINEMA</h1>
+    </div>
+    <div class="content">
+      <h2>Welcome, {{userName}}!</h2>
+      <p>Thank you for joining Cinema. We're excited to have you in our community of movie lovers!</p>
+
+      <div class="features">
+        <h3 style="margin-top: 0; color: #1f2937;">What you can do:</h3>
+        <ul>
+          <li>Browse the latest movies and showtimes</li>
+          <li>Book tickets online instantly</li>
+          <li>Read reviews and ratings</li>
+          <li>Get personalized movie recommendations</li>
+          <li>Save your favorite movies to a watchlist</li>
+        </ul>
+      </div>
+
+      <div class="verification-section">
+        <p><strong>Important:</strong> Please verify your email address to unlock all features.</p>
+        <p>Click the button below to verify your account:</p>
+      </div>
+
+      <a href="{{verificationLink}}" class="button">Verify Email Address</a>
+
+      <p>If the button doesn't work, copy and paste this link into your browser:</p>
+      <p style="word-break: break-all; color: #dc2626;">{{verificationLink}}</p>
+
+      <p>Ready to start exploring?</p>
+
+      <a href="{{appUrl}}" class="button">Go to Cinema</a>
+
+      <p>If you have any questions, feel free to contact us anytime!</p>
+    </div>
+    <div class="footer">
+      <p>&copy; {{currentYear}} Cinema. All rights reserved.</p>
+      <p>This is an automated email, please do not reply.</p>
+    </div>
+  </div>
+</body>
+</html>
