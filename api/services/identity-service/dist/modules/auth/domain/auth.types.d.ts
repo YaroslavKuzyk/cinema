@@ -15,6 +15,7 @@ export interface IUserInfo {
     lastName: string;
     userType: EUserType;
     emailVerified: boolean;
+    avatarKey: string | null;
 }
 export interface IAuthResponse extends ITokens {
     user: IUserInfo;

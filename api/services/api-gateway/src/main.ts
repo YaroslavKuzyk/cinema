@@ -12,10 +12,10 @@ async function bootstrap() {
     logger: ['error', 'warn', 'log', 'debug', 'verbose'],
   });
 
-  const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:4000';
+  const frontendUrl = process.env.FRONTEND_URL;
 
   app.enableCors({
-    origin: [frontendUrl, 'http://localhost:3000'],
+    origin: [frontendUrl],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Request-Id'],
@@ -41,7 +41,7 @@ async function bootstrap() {
     .setVersion('1.0')
     .addBearerAuth()
     .addCookieAuth('refreshToken')
-    .addServer(`http://localhost:${process.env.API_PORT || 3000}`, 'Local')
+    .addServer(`http://localhost:${process.env.API_GATEWAY_PORT}`, 'Local')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
@@ -78,7 +78,7 @@ async function bootstrap() {
     `);
   });
 
-  const port = process.env.API_PORT || 3000;
+  const port = process.env.API_GATEWAY_PORT!;
   await app.listen(port);
 
   logger.log(`API Gateway is running on http://localhost:${port}`);

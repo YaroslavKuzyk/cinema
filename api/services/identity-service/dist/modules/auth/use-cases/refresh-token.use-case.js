@@ -62,7 +62,7 @@ let RefreshTokenUseCase = class RefreshTokenUseCase {
             deviceInfo: userToken.deviceInfo ?? undefined,
             ipAddress: userToken.ipAddress ?? undefined,
         });
-        return this.authMapper.toTokensResult(tokens);
+        return this.authMapper.toAuthResult(tokens, user);
     }
 };
 exports.RefreshTokenUseCase = RefreshTokenUseCase;

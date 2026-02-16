@@ -1,27 +1,28 @@
-import { HttpService } from '@nestjs/axios';
-import { ConfigService } from '@nestjs/config';
+import { OnModuleInit } from '@nestjs/common';
+import { ClientKafka } from '@nestjs/microservices';
 interface ServiceHealth {
     name: string;
-    status: 'healthy' | 'unhealthy';
-    responseTime?: number;
+    status: 'healthy' | 'unhealthy' | 'unknown';
     error?: string;
 }
 interface HealthResponse {
     status: 'healthy' | 'degraded' | 'unhealthy';
     timestamp: string;
-    services: ServiceHealth[];
+    gateway: string;
+    kafka: ServiceHealth;
 }
-export declare class HealthController {
-    private readonly httpService;
-    private readonly configService;
-    constructor(httpService: HttpService, configService: ConfigService);
+export declare class HealthController implements OnModuleInit {
+    private readonly identityClient;
+    private kafkaConnected;
+    constructor(identityClient: ClientKafka);
+    onModuleInit(): Promise<void>;
     check(): Promise<HealthResponse>;
     liveness(): Promise<{
         status: string;
     }>;
     readiness(): Promise<{
         status: string;
+        kafka: boolean;
     }>;
-    private checkService;
 }
 export {};

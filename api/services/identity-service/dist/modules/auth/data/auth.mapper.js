@@ -18,6 +18,7 @@ let AuthMapper = class AuthMapper {
             lastName: user.lastName,
             userType: user.userType,
             emailVerified: user.emailVerified,
+            avatarKey: user.avatarKey,
         };
     }
     toAuthResult(tokens, user) {

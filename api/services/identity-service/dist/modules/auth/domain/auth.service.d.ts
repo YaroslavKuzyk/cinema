@@ -9,7 +9,7 @@ import { VerifyEmailUseCase } from '../use-cases/verify-email.use-case';
 import { ResendVerificationUseCase } from '../use-cases/resend-verification.use-case';
 import { ForgotPasswordUseCase } from '../use-cases/forgot-password.use-case';
 import { ResetPasswordUseCase } from '../use-cases/reset-password.use-case';
-import { IRegisterData, ILoginData, IAuthResult, ITokensResult, IUserInfo, IForgotPasswordData, IResetPasswordData } from './auth.types';
+import { IRegisterData, ILoginData, IAuthResult, IUserInfo, IForgotPasswordData, IResetPasswordData } from './auth.types';
 export declare class AuthService {
     private readonly registerUseCase;
     private readonly loginUseCase;
@@ -24,7 +24,7 @@ export declare class AuthService {
     constructor(registerUseCase: RegisterUseCase, loginUseCase: LoginUseCase, refreshTokenUseCase: RefreshTokenUseCase, logoutUseCase: LogoutUseCase, logoutAllUseCase: LogoutAllUseCase, getCurrentUserUseCase: GetCurrentUserUseCase, verifyEmailUseCase: VerifyEmailUseCase, resendVerificationUseCase: ResendVerificationUseCase, forgotPasswordUseCase: ForgotPasswordUseCase, resetPasswordUseCase: ResetPasswordUseCase);
     register(data: IRegisterData): Promise<IAuthResult>;
     login(data: ILoginData): Promise<IAuthResult>;
-    refresh(userId: ID, refreshToken: string): Promise<ITokensResult>;
+    refresh(userId: ID, refreshToken: string): Promise<IAuthResult>;
     logout(refreshToken: string): Promise<void>;
     logoutAll(userId: ID): Promise<void>;
     getCurrentUser(userId: ID): Promise<IUserInfo>;

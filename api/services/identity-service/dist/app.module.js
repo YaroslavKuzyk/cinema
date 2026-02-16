@@ -9,14 +9,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
-const core_1 = require("@nestjs/core");
 const database_1 = require("./infrastructure/database");
 const messaging_1 = require("./infrastructure/messaging");
 const users_module_1 = require("./modules/users/users.module");
 const tokens_module_1 = require("./modules/tokens/tokens.module");
 const auth_module_1 = require("./modules/auth/auth.module");
 const profile_module_1 = require("./modules/profile/profile.module");
-const jwt_access_guard_1 = require("./modules/auth/guards/jwt-access.guard");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -30,12 +28,6 @@ exports.AppModule = AppModule = __decorate([
             tokens_module_1.TokensModule,
             auth_module_1.AuthModule,
             profile_module_1.ProfileModule,
-        ],
-        providers: [
-            {
-                provide: core_1.APP_GUARD,
-                useClass: jwt_access_guard_1.JwtAccessGuard,
-            },
         ],
     })
 ], AppModule);

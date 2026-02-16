@@ -8,15 +8,14 @@
     "shared"
   ],
   "scripts": {
-    "dev": "npm run build:shared && npm run dev --workspaces --if-present",
+    "dev": "npm run build:shared && concurrently -n identity,storage,gateway -c blue,green,yellow \"npm run dev -w @cinema/identity-service\" \"npm run dev -w @cinema/storage-service\" \"npm run dev -w @cinema/api-gateway\"",
     "build:shared": "npm run build -w @cinema/shared",
     "build": "npm run build --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
-    "docker:up": "docker-compose -f infrastructure/docker-compose.yml up -d",
-    "docker:down": "docker-compose -f infrastructure/docker-compose.yml down"
+    "test": "npm run test --workspaces --if-present"
   },
   "devDependencies": {
+    "concurrently": "^9.2.1",
     "typescript": "^5.7.3"
   }
 }

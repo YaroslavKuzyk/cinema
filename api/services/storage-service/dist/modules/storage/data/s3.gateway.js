@@ -31,13 +31,14 @@ let S3Gateway = S3Gateway_1 = class S3Gateway {
                 accessKeyId: this.configService.getOrThrow('AWS_ACCESS_KEY_ID'),
                 secretAccessKey: this.configService.getOrThrow('AWS_SECRET_ACCESS_KEY'),
             },
+            requestChecksumCalculation: 'WHEN_REQUIRED',
+            responseChecksumValidation: 'WHEN_REQUIRED',
         });
     }
-    async getUploadUrl(key, contentType, expiresIn = 3600) {
+    async getUploadUrl(key, _contentType, expiresIn = 3600) {
         const command = new client_s3_1.PutObjectCommand({
             Bucket: this.bucket,
             Key: key,
-            ContentType: contentType,
         });
         const url = await (0, s3_request_presigner_1.getSignedUrl)(this.client, command, { expiresIn });
         const expiresAt = new Date(Date.now() + expiresIn * 1000);

@@ -17,5 +17,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./contracts/identity"), exports);
 __exportStar(require("./contracts/notification"), exports);
 __exportStar(require("./contracts/storage"), exports);
+__exportStar(require("./contracts/kafka"), exports);
 __exportStar(require("./events"), exports);
 //# sourceMappingURL=index.js.map

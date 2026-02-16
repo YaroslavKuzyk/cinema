@@ -11,6 +11,7 @@ const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const passport_1 = require("@nestjs/passport");
 const auth_controller_1 = require("./auth.controller");
+const auth_message_controller_1 = require("./auth-message.controller");
 const auth_service_1 = require("./domain/auth.service");
 const jwt_tokens_gateway_1 = require("./domain/jwt-tokens.gateway");
 const password_gateway_1 = require("./domain/password.gateway");
@@ -35,7 +36,7 @@ exports.AuthModule = AuthModule = __decorate([
             tokens_module_1.TokensModule,
             messaging_1.KafkaModule,
         ],
-        controllers: [auth_controller_1.AuthController],
+        controllers: [auth_controller_1.AuthController, auth_message_controller_1.AuthMessageController],
         providers: [
             { provide: jwt_tokens_gateway_1.IJwtTokensGateway, useClass: jwt_tokens_gateway_2.JwtTokensGateway },
             { provide: password_gateway_1.IPasswordGateway, useClass: password_gateway_2.PasswordGateway },

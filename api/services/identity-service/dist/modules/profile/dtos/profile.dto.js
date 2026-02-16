@@ -40,6 +40,7 @@ class UpdateProfileDto {
     keyword;
     description;
     state;
+    avatarKey;
 }
 exports.UpdateProfileDto = UpdateProfileDto;
 __decorate([
@@ -60,6 +61,12 @@ __decorate([
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], UpdateProfileDto.prototype, "state", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ example: 'avatars/user-123/photo.jpg' }),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsOptional)(),
+    __metadata("design:type", Object)
+], UpdateProfileDto.prototype, "avatarKey", void 0);
 class ProfileResponseDto {
     userId;
     keyword;

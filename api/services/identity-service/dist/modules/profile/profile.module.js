@@ -9,7 +9,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfileModule = void 0;
 const common_1 = require("@nestjs/common");
 const database_1 = require("../../infrastructure/database");
+const users_module_1 = require("../users/users.module");
 const profile_controller_1 = require("./profile.controller");
+const profile_message_controller_1 = require("./profile-message.controller");
 const profile_service_1 = require("./domain/profile.service");
 const profile_gateway_1 = require("./domain/profile.gateway");
 const profile_gateway_2 = require("./data/profile.gateway");
@@ -20,8 +22,8 @@ let ProfileModule = class ProfileModule {
 exports.ProfileModule = ProfileModule;
 exports.ProfileModule = ProfileModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_1.DatabaseModule],
-        controllers: [profile_controller_1.ProfileController],
+        imports: [database_1.DatabaseModule, (0, common_1.forwardRef)(() => users_module_1.UsersModule)],
+        controllers: [profile_controller_1.ProfileController, profile_message_controller_1.ProfileMessageController],
         providers: [
             { provide: profile_gateway_1.IProfileGateway, useClass: profile_gateway_2.ProfileGateway },
             profile_service_1.ProfileService,

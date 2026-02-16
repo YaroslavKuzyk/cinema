@@ -60,7 +60,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], StorageController.prototype, "getDownloadUrl", null);
 __decorate([
-    (0, common_1.Delete)('*key'),
+    (0, common_1.Delete)(':key(*)'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, swagger_1.ApiOperation)({ summary: 'Delete a file from storage' }),
     (0, swagger_1.ApiOkResponse)({

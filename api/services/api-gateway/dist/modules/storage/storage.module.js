@@ -8,22 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StorageModule = void 0;
 const common_1 = require("@nestjs/common");
-const axios_1 = require("@nestjs/axios");
 const config_1 = require("@nestjs/config");
-const storage_proxy_controller_1 = require("./storage-proxy.controller");
+const storage_controller_1 = require("./storage.controller");
+const auth_module_1 = require("../auth/auth.module");
 let StorageModule = class StorageModule {
 };
 exports.StorageModule = StorageModule;
 exports.StorageModule = StorageModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            axios_1.HttpModule.register({
-                timeout: 60000,
-                maxRedirects: 5,
-            }),
-            config_1.ConfigModule,
-        ],
-        controllers: [storage_proxy_controller_1.StorageProxyController],
+        imports: [config_1.ConfigModule, auth_module_1.AuthModule],
+        controllers: [storage_controller_1.StorageController],
     })
 ], StorageModule);
 //# sourceMappingURL=storage.module.js.map

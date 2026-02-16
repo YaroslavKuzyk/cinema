@@ -11,7 +11,9 @@ const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
 const throttler_1 = require("@nestjs/throttler");
 const core_1 = require("@nestjs/core");
+const kafka_client_module_1 = require("./infrastructure/kafka/kafka-client.module");
 const health_module_1 = require("./modules/health/health.module");
+const auth_module_1 = require("./modules/auth/auth.module");
 const identity_module_1 = require("./modules/identity/identity.module");
 const storage_module_1 = require("./modules/storage/storage.module");
 let AppModule = class AppModule {
@@ -41,7 +43,9 @@ exports.AppModule = AppModule = __decorate([
                     limit: 200,
                 },
             ]),
+            kafka_client_module_1.KafkaClientModule,
             health_module_1.HealthModule,
+            auth_module_1.AuthModule,
             identity_module_1.IdentityModule,
             storage_module_1.StorageModule,
         ],

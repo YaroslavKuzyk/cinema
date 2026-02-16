@@ -19,6 +19,7 @@ let UsersMapper = class UsersMapper {
             lastName: data.lastName,
             userType: data.userType,
             emailVerified: data.emailVerified,
+            avatarKey: data.avatarKey,
             createdAt: data.createdAt,
             updatedAt: data.updatedAt,
         };
@@ -49,6 +50,7 @@ let UsersMapper = class UsersMapper {
             userType: data.userType,
             password: data.password,
             emailVerified: data.emailVerified,
+            avatarKey: data.avatarKey,
         };
     }
 };

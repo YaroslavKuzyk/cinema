@@ -43,7 +43,7 @@ export class StorageController {
     return this.storageService.getDownloadUrl(dto.key, dto.expiresIn);
   }
 
-  @Delete('*key')
+  @Delete(':key(*)')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Delete a file from storage' })
   @ApiOkResponse({

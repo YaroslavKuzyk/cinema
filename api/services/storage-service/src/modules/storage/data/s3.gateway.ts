@@ -27,18 +27,19 @@ export class S3Gateway implements IStorageGateway {
         accessKeyId: this.configService.getOrThrow('AWS_ACCESS_KEY_ID'),
         secretAccessKey: this.configService.getOrThrow('AWS_SECRET_ACCESS_KEY'),
       },
+      requestChecksumCalculation: 'WHEN_REQUIRED',
+      responseChecksumValidation: 'WHEN_REQUIRED',
     });
   }
 
   async getUploadUrl(
     key: string,
-    contentType: string,
+    _contentType: string,
     expiresIn: number = 3600,
   ): Promise<IPresignedUrl> {
     const command = new PutObjectCommand({
       Bucket: this.bucket,
       Key: key,
-      ContentType: contentType,
     });
 
     const url = await getSignedUrl(this.client, command, { expiresIn });

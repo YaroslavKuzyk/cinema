@@ -33,6 +33,11 @@ export class UpdateProfileDto {
   @IsString()
   @IsOptional()
   state?: string;
+
+  @ApiPropertyOptional({ example: 'avatars/user-123/photo.jpg' })
+  @IsString()
+  @IsOptional()
+  avatarKey?: string | null;
 }
 
 export class ProfileResponseDto {

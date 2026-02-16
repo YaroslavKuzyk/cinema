@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { AuthController } from './auth.controller';
+import { AuthMessageController } from './auth-message.controller';
 import { AuthService } from './domain/auth.service';
 import { IJwtTokensGateway } from './domain/jwt-tokens.gateway';
 import { IPasswordGateway } from './domain/password.gateway';
@@ -34,7 +35,7 @@ import { KafkaModule } from '@/infrastructure/messaging';
     TokensModule,
     KafkaModule,
   ],
-  controllers: [AuthController],
+  controllers: [AuthController, AuthMessageController],
   providers: [
     // Gateways
     { provide: IJwtTokensGateway, useClass: JwtTokensGateway },

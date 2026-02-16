@@ -11,6 +11,7 @@ export interface IUserData {
     lastName: string;
     userType: EUserType;
     emailVerified: boolean;
+    avatarKey: string | null;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -28,4 +29,5 @@ export interface ICreateUserData {
 export interface IUpdateUserData extends Partial<Omit<ICreateUserData, 'password'>> {
     password?: string;
     emailVerified?: boolean;
+    avatarKey?: string | null;
 }

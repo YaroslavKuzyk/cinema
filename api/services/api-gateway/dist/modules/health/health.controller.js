@@ -8,101 +8,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HealthController = void 0;
 const common_1 = require("@nestjs/common");
 const swagger_1 = require("@nestjs/swagger");
-const axios_1 = require("@nestjs/axios");
-const config_1 = require("@nestjs/config");
-const rxjs_1 = require("rxjs");
-const rxjs_2 = require("rxjs");
+const microservices_1 = require("@nestjs/microservices");
 let HealthController = class HealthController {
-    httpService;
-    configService;
-    constructor(httpService, configService) {
-        this.httpService = httpService;
-        this.configService = configService;
+    identityClient;
+    kafkaConnected = false;
+    constructor(identityClient) {
+        this.identityClient = identityClient;
+    }
+    async onModuleInit() {
+        try {
+            await this.identityClient.connect();
+            this.kafkaConnected = true;
+        }
+        catch {
+            this.kafkaConnected = false;
+        }
     }
     async check() {
-        const services = await Promise.all([
-            this.checkService('identity-service', this.configService.get('IDENTITY_SERVICE_URL')),
-            this.checkService('storage-service', this.configService.get('STORAGE_SERVICE_URL')),
-        ]);
-        const healthyCount = services.filter((s) => s.status === 'healthy').length;
-        let overallStatus;
-        if (healthyCount === services.length) {
-            overallStatus = 'healthy';
-        }
-        else if (healthyCount > 0) {
-            overallStatus = 'degraded';
-        }
-        else {
-            overallStatus = 'unhealthy';
-        }
+        const kafkaHealth = {
+            name: 'kafka',
+            status: this.kafkaConnected ? 'healthy' : 'unhealthy',
+            error: this.kafkaConnected ? undefined : 'Kafka not connected',
+        };
+        const overallStatus = this.kafkaConnected ? 'healthy' : 'degraded';
         const response = {
             status: overallStatus,
             timestamp: new Date().toISOString(),
-            services,
+            gateway: 'healthy',
+            kafka: kafkaHealth,
         };
-        if (overallStatus === 'unhealthy') {
-            throw new common_1.HttpException(response, common_1.HttpStatus.SERVICE_UNAVAILABLE);
-        }
         return response;
     }
     async liveness() {
         return { status: 'ok' };
     }
     async readiness() {
-        const identityUrl = this.configService.get('IDENTITY_SERVICE_URL');
-        const storageUrl = this.configService.get('STORAGE_SERVICE_URL');
-        if (!identityUrl || !storageUrl) {
-            throw new common_1.HttpException({ status: 'not ready', reason: 'Missing service URLs configuration' }, common_1.HttpStatus.SERVICE_UNAVAILABLE);
+        if (!this.kafkaConnected) {
+            throw new common_1.HttpException({ status: 'not ready', reason: 'Kafka not connected' }, common_1.HttpStatus.SERVICE_UNAVAILABLE);
         }
-        return { status: 'ready' };
-    }
-    async checkService(name, baseUrl) {
-        if (!baseUrl) {
-            return {
-                name,
-                status: 'unhealthy',
-                error: 'Service URL not configured',
-            };
-        }
-        const startTime = Date.now();
-        try {
-            const response = await (0, rxjs_1.firstValueFrom)(this.httpService.get(`${baseUrl}/health`).pipe((0, rxjs_1.timeout)(5000), (0, rxjs_1.catchError)((error) => {
-                return (0, rxjs_2.of)({ error });
-            })));
-            if ('error' in response) {
-                const error = response.error;
-                return {
-                    name,
-                    status: 'unhealthy',
-                    responseTime: Date.now() - startTime,
-                    error: error.code || error.message || 'Connection failed',
-                };
-            }
-            return {
-                name,
-                status: 'healthy',
-                responseTime: Date.now() - startTime,
-            };
-        }
-        catch (error) {
-            const err = error;
-            return {
-                name,
-                status: 'unhealthy',
-                responseTime: Date.now() - startTime,
-                error: err.code || err.message || 'Unknown error',
-            };
-        }
+        return { status: 'ready', kafka: true };
     }
 };
 exports.HealthController = HealthController;
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Check API Gateway and downstream services health' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Check API Gateway health' }),
     (0, swagger_1.ApiOkResponse)({
         description: 'Health check passed',
         schema: {
@@ -110,22 +67,19 @@ __decorate([
             properties: {
                 status: { type: 'string', enum: ['healthy', 'degraded', 'unhealthy'] },
                 timestamp: { type: 'string', format: 'date-time' },
-                services: {
-                    type: 'array',
-                    items: {
-                        type: 'object',
-                        properties: {
-                            name: { type: 'string' },
-                            status: { type: 'string', enum: ['healthy', 'unhealthy'] },
-                            responseTime: { type: 'number' },
-                            error: { type: 'string' },
-                        },
+                gateway: { type: 'string' },
+                kafka: {
+                    type: 'object',
+                    properties: {
+                        name: { type: 'string' },
+                        status: { type: 'string', enum: ['healthy', 'unhealthy', 'unknown'] },
+                        error: { type: 'string' },
                     },
                 },
             },
         },
     }),
-    (0, swagger_1.ApiServiceUnavailableResponse)({ description: 'One or more services are unhealthy' }),
+    (0, swagger_1.ApiServiceUnavailableResponse)({ description: 'Gateway is unhealthy' }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
@@ -140,7 +94,7 @@ __decorate([
 ], HealthController.prototype, "liveness", null);
 __decorate([
     (0, common_1.Get)('ready'),
-    (0, swagger_1.ApiOperation)({ summary: 'Readiness probe - checks if the gateway is ready to accept traffic' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Readiness probe - checks if the gateway is ready' }),
     (0, swagger_1.ApiOkResponse)({ description: 'Gateway is ready' }),
     (0, swagger_1.ApiServiceUnavailableResponse)({ description: 'Gateway is not ready' }),
     __metadata("design:type", Function),
@@ -150,7 +104,7 @@ __decorate([
 exports.HealthController = HealthController = __decorate([
     (0, swagger_1.ApiTags)('Health'),
     (0, common_1.Controller)('health'),
-    __metadata("design:paramtypes", [axios_1.HttpService,
-        config_1.ConfigService])
+    __param(0, (0, common_1.Inject)('IDENTITY_SERVICE')),
+    __metadata("design:paramtypes", [microservices_1.ClientKafka])
 ], HealthController);
 //# sourceMappingURL=health.controller.js.map

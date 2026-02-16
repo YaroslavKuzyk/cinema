@@ -8,22 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IdentityModule = void 0;
 const common_1 = require("@nestjs/common");
-const axios_1 = require("@nestjs/axios");
 const config_1 = require("@nestjs/config");
-const identity_proxy_controller_1 = require("./identity-proxy.controller");
+const identity_controller_1 = require("./identity.controller");
+const auth_module_1 = require("../auth/auth.module");
 let IdentityModule = class IdentityModule {
 };
 exports.IdentityModule = IdentityModule;
 exports.IdentityModule = IdentityModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            axios_1.HttpModule.register({
-                timeout: 80000,
-                maxRedirects: 5,
-            }),
-            config_1.ConfigModule,
-        ],
-        controllers: [identity_proxy_controller_1.IdentityProxyController],
+        imports: [config_1.ConfigModule, auth_module_1.AuthModule],
+        controllers: [identity_controller_1.IdentityController],
     })
 ], IdentityModule);
 //# sourceMappingURL=identity.module.js.map

@@ -1,33 +1,40 @@
-import { Controller, Get, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Inject, HttpStatus, HttpException, OnModuleInit } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiOkResponse, ApiServiceUnavailableResponse } from '@nestjs/swagger';
-import { HttpService } from '@nestjs/axios';
-import { ConfigService } from '@nestjs/config';
-import { firstValueFrom, timeout, catchError } from 'rxjs';
-import { of } from 'rxjs';
+import { ClientKafka } from '@nestjs/microservices';
 
 interface ServiceHealth {
   name: string;
-  status: 'healthy' | 'unhealthy';
-  responseTime?: number;
+  status: 'healthy' | 'unhealthy' | 'unknown';
   error?: string;
 }
 
 interface HealthResponse {
   status: 'healthy' | 'degraded' | 'unhealthy';
   timestamp: string;
-  services: ServiceHealth[];
+  gateway: string;
+  kafka: ServiceHealth;
 }
 
 @ApiTags('Health')
 @Controller('health')
-export class HealthController {
+export class HealthController implements OnModuleInit {
+  private kafkaConnected = false;
+
   constructor(
-    private readonly httpService: HttpService,
-    private readonly configService: ConfigService,
+    @Inject('IDENTITY_SERVICE') private readonly identityClient: ClientKafka,
   ) {}
 
+  async onModuleInit() {
+    try {
+      await this.identityClient.connect();
+      this.kafkaConnected = true;
+    } catch {
+      this.kafkaConnected = false;
+    }
+  }
+
   @Get()
-  @ApiOperation({ summary: 'Check API Gateway and downstream services health' })
+  @ApiOperation({ summary: 'Check API Gateway health' })
   @ApiOkResponse({
     description: 'Health check passed',
     schema: {
@@ -35,48 +42,34 @@ export class HealthController {
       properties: {
         status: { type: 'string', enum: ['healthy', 'degraded', 'unhealthy'] },
         timestamp: { type: 'string', format: 'date-time' },
-        services: {
-          type: 'array',
-          items: {
-            type: 'object',
-            properties: {
-              name: { type: 'string' },
-              status: { type: 'string', enum: ['healthy', 'unhealthy'] },
-              responseTime: { type: 'number' },
-              error: { type: 'string' },
-            },
+        gateway: { type: 'string' },
+        kafka: {
+          type: 'object',
+          properties: {
+            name: { type: 'string' },
+            status: { type: 'string', enum: ['healthy', 'unhealthy', 'unknown'] },
+            error: { type: 'string' },
           },
         },
       },
     },
   })
-  @ApiServiceUnavailableResponse({ description: 'One or more services are unhealthy' })
+  @ApiServiceUnavailableResponse({ description: 'Gateway is unhealthy' })
   async check(): Promise<HealthResponse> {
-    const services = await Promise.all([
-      this.checkService('identity-service', this.configService.get<string>('IDENTITY_SERVICE_URL')),
-      this.checkService('storage-service', this.configService.get<string>('STORAGE_SERVICE_URL')),
-    ]);
+    const kafkaHealth: ServiceHealth = {
+      name: 'kafka',
+      status: this.kafkaConnected ? 'healthy' : 'unhealthy',
+      error: this.kafkaConnected ? undefined : 'Kafka not connected',
+    };
 
-    const healthyCount = services.filter((s) => s.status === 'healthy').length;
-    let overallStatus: 'healthy' | 'degraded' | 'unhealthy';
-
-    if (healthyCount === services.length) {
-      overallStatus = 'healthy';
-    } else if (healthyCount > 0) {
-      overallStatus = 'degraded';
-    } else {
-      overallStatus = 'unhealthy';
-    }
+    const overallStatus = this.kafkaConnected ? 'healthy' : 'degraded';
 
     const response: HealthResponse = {
       status: overallStatus,
       timestamp: new Date().toISOString(),
-      services,
+      gateway: 'healthy',
+      kafka: kafkaHealth,
     };
-
-    if (overallStatus === 'unhealthy') {
-      throw new HttpException(response, HttpStatus.SERVICE_UNAVAILABLE);
-    }
 
     return response;
   }
@@ -89,67 +82,17 @@ export class HealthController {
   }
 
   @Get('ready')
-  @ApiOperation({ summary: 'Readiness probe - checks if the gateway is ready to accept traffic' })
+  @ApiOperation({ summary: 'Readiness probe - checks if the gateway is ready' })
   @ApiOkResponse({ description: 'Gateway is ready' })
   @ApiServiceUnavailableResponse({ description: 'Gateway is not ready' })
-  async readiness(): Promise<{ status: string }> {
-    const identityUrl = this.configService.get<string>('IDENTITY_SERVICE_URL');
-    const storageUrl = this.configService.get<string>('STORAGE_SERVICE_URL');
-
-    if (!identityUrl || !storageUrl) {
+  async readiness(): Promise<{ status: string; kafka: boolean }> {
+    if (!this.kafkaConnected) {
       throw new HttpException(
-        { status: 'not ready', reason: 'Missing service URLs configuration' },
+        { status: 'not ready', reason: 'Kafka not connected' },
         HttpStatus.SERVICE_UNAVAILABLE,
       );
     }
 
-    return { status: 'ready' };
-  }
-
-  private async checkService(name: string, baseUrl: string | undefined): Promise<ServiceHealth> {
-    if (!baseUrl) {
-      return {
-        name,
-        status: 'unhealthy',
-        error: 'Service URL not configured',
-      };
-    }
-
-    const startTime = Date.now();
-
-    try {
-      const response = await firstValueFrom(
-        this.httpService.get(`${baseUrl}/health`).pipe(
-          timeout(5000),
-          catchError((error) => {
-            return of({ error });
-          }),
-        ),
-      );
-
-      if ('error' in response) {
-        const error = response.error as Error & { code?: string; message?: string };
-        return {
-          name,
-          status: 'unhealthy',
-          responseTime: Date.now() - startTime,
-          error: error.code || error.message || 'Connection failed',
-        };
-      }
-
-      return {
-        name,
-        status: 'healthy',
-        responseTime: Date.now() - startTime,
-      };
-    } catch (error) {
-      const err = error as Error & { code?: string };
-      return {
-        name,
-        status: 'unhealthy',
-        responseTime: Date.now() - startTime,
-        error: err.code || err.message || 'Unknown error',
-      };
-    }
+    return { status: 'ready', kafka: true };
   }
 }

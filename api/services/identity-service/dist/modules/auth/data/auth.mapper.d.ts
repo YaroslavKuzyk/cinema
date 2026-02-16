@@ -8,6 +8,7 @@ interface IUserInput {
     lastName: string;
     userType: EUserType;
     emailVerified: boolean;
+    avatarKey: string | null;
 }
 export declare class AuthMapper {
     toUserInfo(user: IUserInput): IUserInfo;

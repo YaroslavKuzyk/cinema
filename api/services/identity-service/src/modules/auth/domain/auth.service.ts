@@ -14,7 +14,6 @@ import {
   IRegisterData,
   ILoginData,
   IAuthResult,
-  ITokensResult,
   IUserInfo,
   IForgotPasswordData,
   IResetPasswordData,
@@ -43,7 +42,7 @@ export class AuthService {
     return this.loginUseCase.execute(data);
   }
 
-  async refresh(userId: ID, refreshToken: string): Promise<ITokensResult> {
+  async refresh(userId: ID, refreshToken: string): Promise<IAuthResult> {
     return this.refreshTokenUseCase.execute(userId, refreshToken);
   }
 

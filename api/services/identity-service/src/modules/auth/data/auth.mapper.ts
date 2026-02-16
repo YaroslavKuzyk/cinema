@@ -10,6 +10,7 @@ interface IUserInput {
   lastName: string;
   userType: EUserType;
   emailVerified: boolean;
+  avatarKey: string | null;
 }
 
 @Injectable()
@@ -23,6 +24,7 @@ export class AuthMapper {
       lastName: user.lastName,
       userType: user.userType,
       emailVerified: user.emailVerified,
+      avatarKey: user.avatarKey,
     };
   }
 

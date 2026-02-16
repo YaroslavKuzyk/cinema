@@ -1,6 +1,8 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { DatabaseModule } from '@/infrastructure/database';
+import { UsersModule } from '@/modules/users/users.module';
 import { ProfileController } from './profile.controller';
+import { ProfileMessageController } from './profile-message.controller';
 import { ProfileService } from './domain/profile.service';
 import { IProfileGateway } from './domain/profile.gateway';
 import { ProfileGateway } from './data/profile.gateway';
@@ -12,8 +14,8 @@ import {
 } from './use-cases';
 
 @Module({
-  imports: [DatabaseModule],
-  controllers: [ProfileController],
+  imports: [DatabaseModule, forwardRef(() => UsersModule)],
+  controllers: [ProfileController, ProfileMessageController],
   providers: [
     { provide: IProfileGateway, useClass: ProfileGateway },
     ProfileService,

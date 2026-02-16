@@ -12,22 +12,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UpdateProfileUseCase = void 0;
 const common_1 = require("@nestjs/common");
 const profile_gateway_1 = require("../domain/profile.gateway");
+const users_service_1 = require("../../users/domain/users.service");
 let UpdateProfileUseCase = class UpdateProfileUseCase {
     profileGateway;
-    constructor(profileGateway) {
+    usersService;
+    constructor(profileGateway, usersService) {
         this.profileGateway = profileGateway;
+        this.usersService = usersService;
     }
     async execute(userId, data) {
-        const existingProfile = await this.profileGateway.findByUserId(userId);
+        let existingProfile = await this.profileGateway.findByUserId(userId);
         if (!existingProfile) {
-            throw new common_1.NotFoundException('Profile not found');
+            existingProfile = await this.profileGateway.create({ userId });
         }
-        return this.profileGateway.update(userId, data);
+        if (data.avatarKey !== undefined) {
+            await this.usersService.update(userId, { avatarKey: data.avatarKey });
+        }
+        const { avatarKey, ...profileData } = data;
+        return this.profileGateway.update(userId, profileData);
     }
 };
 exports.UpdateProfileUseCase = UpdateProfileUseCase;
 exports.UpdateProfileUseCase = UpdateProfileUseCase = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [profile_gateway_1.IProfileGateway])
+    __metadata("design:paramtypes", [profile_gateway_1.IProfileGateway,
+        users_service_1.UsersService])
 ], UpdateProfileUseCase);
 //# sourceMappingURL=update-profile.use-case.js.map

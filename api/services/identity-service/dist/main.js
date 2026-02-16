@@ -1,65 +1,41 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const core_1 = require("@nestjs/core");
+const microservices_1 = require("@nestjs/microservices");
 const config_1 = require("@nestjs/config");
 const common_1 = require("@nestjs/common");
-const swagger_1 = require("@nestjs/swagger");
-const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const app_module_1 = require("./app.module");
 async function bootstrap() {
-    const app = await core_1.NestFactory.create(app_module_1.AppModule);
-    const configService = app.get(config_1.ConfigService);
-    app.use((0, cookie_parser_1.default)());
-    app.enableCors({
-        origin: configService.getOrThrow('FRONTEND_URL'),
-        credentials: true,
+    const logger = new common_1.Logger('IdentityService');
+    const appContext = await core_1.NestFactory.createApplicationContext(app_module_1.AppModule);
+    const configService = appContext.get(config_1.ConfigService);
+    const kafkaBrokers = configService
+        .get('KAFKA_BROKERS', 'localhost:9092')
+        .split(',');
+    const kafkaClientId = configService.get('KAFKA_CLIENT_ID', 'identity-service');
+    const kafkaGroupId = configService.get('KAFKA_GROUP_ID', 'identity-service-group');
+    await appContext.close();
+    const app = await core_1.NestFactory.createMicroservice(app_module_1.AppModule, {
+        transport: microservices_1.Transport.KAFKA,
+        options: {
+            client: {
+                clientId: kafkaClientId,
+                brokers: kafkaBrokers,
+            },
+            consumer: {
+                groupId: kafkaGroupId,
+            },
+        },
     });
     app.useGlobalPipes(new common_1.ValidationPipe({
         whitelist: true,
         transform: true,
     }));
-    const config = new swagger_1.DocumentBuilder()
-        .setTitle('Cinema Identity Service')
-        .setDescription('Identity microservice API for user management and authentication')
-        .setVersion('1.0')
-        .addBearerAuth()
-        .build();
-    const document = swagger_1.SwaggerModule.createDocument(app, config);
-    app.use('/openapi.json', (req, res) => {
-        res.json(document);
-    });
-    app.use('/api', (req, res) => {
-        res.send(`
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Cinema Identity Service - API</title>
-  <style>
-    html, body { margin: 0; padding: 0; height: 100%; }
-    elements-api { display: block; height: 100%; }
-  </style>
-</head>
-<body>
-  <elements-api
-    id="docs"
-    apiDescriptionUrl="/openapi.json"
-    router="hash"
-    layout="sidebar"
-  />
-  <script src="https://unpkg.com/@stoplight/elements/web-components.min.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/@stoplight/elements/styles.min.css">
-</body>
-</html>
-    `);
-    });
-    const port = configService.getOrThrow('API_PORT');
-    await app.listen(port);
-    console.log(`Identity Service is running on port ${port}`);
-    console.log(`API Documentation available at http://localhost:${port}/api`);
+    await app.listen();
+    logger.log('Identity Service Kafka Microservice is running');
+    logger.log(`Client ID: ${kafkaClientId}`);
+    logger.log(`Group ID: ${kafkaGroupId}`);
+    logger.log(`Brokers: ${kafkaBrokers.join(', ')}`);
 }
 void bootstrap();
 //# sourceMappingURL=main.js.map

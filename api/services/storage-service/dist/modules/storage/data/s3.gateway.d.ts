@@ -8,7 +8,7 @@ export declare class S3Gateway implements IStorageGateway {
     private readonly region;
     private readonly logger;
     constructor(configService: ConfigService);
-    getUploadUrl(key: string, contentType: string, expiresIn?: number): Promise<IPresignedUrl>;
+    getUploadUrl(key: string, _contentType: string, expiresIn?: number): Promise<IPresignedUrl>;
     getDownloadUrl(key: string, expiresIn?: number): Promise<IPresignedUrl>;
     getPublicUrl(key: string): string;
     delete(key: string): Promise<void>;

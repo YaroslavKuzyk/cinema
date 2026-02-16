@@ -8,21 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HealthModule = void 0;
 const common_1 = require("@nestjs/common");
-const axios_1 = require("@nestjs/axios");
-const config_1 = require("@nestjs/config");
 const health_controller_1 = require("./health.controller");
 let HealthModule = class HealthModule {
 };
 exports.HealthModule = HealthModule;
 exports.HealthModule = HealthModule = __decorate([
     (0, common_1.Module)({
-        imports: [
-            axios_1.HttpModule.register({
-                timeout: 5000,
-                maxRedirects: 5,
-            }),
-            config_1.ConfigModule,
-        ],
         controllers: [health_controller_1.HealthController],
     })
 ], HealthModule);

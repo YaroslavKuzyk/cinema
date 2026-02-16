@@ -4,7 +4,7 @@ import { UsersService } from '@/modules/users/domain/users.service';
 import { TokensService } from '@/modules/tokens/domain/tokens.service';
 import { IJwtTokensGateway } from '../domain/jwt-tokens.gateway';
 import { AuthMapper } from '../data/auth.mapper';
-import { ITokensResult } from '../domain/auth.types';
+import { IAuthResult } from '../domain/auth.types';
 
 @Injectable()
 export class RefreshTokenUseCase {
@@ -23,7 +23,7 @@ export class RefreshTokenUseCase {
     return expiry;
   }
 
-  async execute(userId: ID, refreshToken: string): Promise<ITokensResult> {
+  async execute(userId: ID, refreshToken: string): Promise<IAuthResult> {
     const userToken = await this.tokensService.findByToken(refreshToken);
 
     if (!userToken || userToken.type !== ETokenType.REFRESH_TOKEN) {
@@ -60,6 +60,6 @@ export class RefreshTokenUseCase {
       ipAddress: userToken.ipAddress ?? undefined,
     });
 
-    return this.authMapper.toTokensResult(tokens);
+    return this.authMapper.toAuthResult(tokens, user);
   }
 }

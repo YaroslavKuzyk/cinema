@@ -7,6 +7,7 @@ export declare class UpdateProfileDto {
     keyword?: string;
     description?: string;
     state?: string;
+    avatarKey?: string | null;
 }
 export declare class ProfileResponseDto {
     userId: string;

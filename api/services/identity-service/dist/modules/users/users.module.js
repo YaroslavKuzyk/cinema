@@ -9,6 +9,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./domain/users.service");
+const users_message_controller_1 = require("./users-message.controller");
 const users_gateway_1 = require("./domain/users.gateway");
 const users_mapper_1 = require("./data/users.mapper");
 const users_gateway_2 = require("./data/users.gateway");
@@ -17,6 +18,7 @@ let UsersModule = class UsersModule {
 exports.UsersModule = UsersModule;
 exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
+        controllers: [users_message_controller_1.UsersMessageController],
         providers: [
             { provide: users_gateway_1.IUsersGateway, useClass: users_gateway_2.UsersGateway },
             users_service_1.UsersService,
