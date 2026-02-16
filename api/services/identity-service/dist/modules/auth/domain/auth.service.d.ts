@@ -1,0 +1,35 @@
+import { ID } from '@cinema/shared';
+import { RegisterUseCase } from '../use-cases/register.use-case';
+import { LoginUseCase } from '../use-cases/login.use-case';
+import { RefreshTokenUseCase } from '../use-cases/refresh-token.use-case';
+import { LogoutUseCase } from '../use-cases/logout.use-case';
+import { LogoutAllUseCase } from '../use-cases/logout-all.use-case';
+import { GetCurrentUserUseCase } from '../use-cases/get-current-user.use-case';
+import { VerifyEmailUseCase } from '../use-cases/verify-email.use-case';
+import { ResendVerificationUseCase } from '../use-cases/resend-verification.use-case';
+import { ForgotPasswordUseCase } from '../use-cases/forgot-password.use-case';
+import { ResetPasswordUseCase } from '../use-cases/reset-password.use-case';
+import { IRegisterData, ILoginData, IAuthResult, ITokensResult, IUserInfo, IForgotPasswordData, IResetPasswordData } from './auth.types';
+export declare class AuthService {
+    private readonly registerUseCase;
+    private readonly loginUseCase;
+    private readonly refreshTokenUseCase;
+    private readonly logoutUseCase;
+    private readonly logoutAllUseCase;
+    private readonly getCurrentUserUseCase;
+    private readonly verifyEmailUseCase;
+    private readonly resendVerificationUseCase;
+    private readonly forgotPasswordUseCase;
+    private readonly resetPasswordUseCase;
+    constructor(registerUseCase: RegisterUseCase, loginUseCase: LoginUseCase, refreshTokenUseCase: RefreshTokenUseCase, logoutUseCase: LogoutUseCase, logoutAllUseCase: LogoutAllUseCase, getCurrentUserUseCase: GetCurrentUserUseCase, verifyEmailUseCase: VerifyEmailUseCase, resendVerificationUseCase: ResendVerificationUseCase, forgotPasswordUseCase: ForgotPasswordUseCase, resetPasswordUseCase: ResetPasswordUseCase);
+    register(data: IRegisterData): Promise<IAuthResult>;
+    login(data: ILoginData): Promise<IAuthResult>;
+    refresh(userId: ID, refreshToken: string): Promise<ITokensResult>;
+    logout(refreshToken: string): Promise<void>;
+    logoutAll(userId: ID): Promise<void>;
+    getCurrentUser(userId: ID): Promise<IUserInfo>;
+    resendVerificationEmail(userId: ID): Promise<void>;
+    verifyEmail(token: string): Promise<void>;
+    forgotPassword(data: IForgotPasswordData): Promise<void>;
+    resetPassword(data: IResetPasswordData): Promise<void>;
+}
