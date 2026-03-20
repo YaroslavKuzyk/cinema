@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx nuxt:*)"
+    ],
+    "additionalDirectories": [
+      "/home/yaroslav/Стільниця/cinema/app"
+    ]
+  }
+}

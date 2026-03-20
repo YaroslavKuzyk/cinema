@@ -1,34 +1,41 @@
-import tailwindcss from '@tailwindcss/vite'
-
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
+  compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  css: ['@/assets/styles/tailwind.css'],
 
-  vite: {
-   plugins: [
-     tailwindcss(),
-   ],
+  runtimeConfig: {
+    public: {
+      apiBase: process.env.API_BASE_URL
+    }
+  },
 
-   shadcn: {
-    /**
-     * Prefix for all the imported component.
-     * @default "Ui"
-     */
-    prefix: '',
-    /**
-     * Directory that the component lives in.
-     * Will respect the Nuxt aliases.
-     * @link https://nuxt.com/docs/api/nuxt-config#alias
-     * @default "@/components/ui"
-     */
-    componentDir: '@/components/ui'
-  }
- },
+  imports: {
+    dirs: [
+      'views/*/api',
+      'views/*/stores'
+    ]
+  },
 
-  modules: ['shadcn-nuxt'],
-  
-  plugins: [
-    '~/plugins/ssr-width.ts',
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/i18n'
   ],
+
+  css: ['~/assets/css/main.css'],
+
+  i18n: {
+    locales: [
+      { code: "en", files: ["en.json"], name: "English", dir: "ltr" },
+      { code: "uk", files: ["uk.json"], name: "Українська", dir: "rtl" },
+    ],
+    defaultLocale: "uk",
+    strategy: "prefix",
+    langDir: "locales",
+    detectBrowserLanguage: false,
+  },
+
+  typescript: {
+    strict: true
+  },
+
+  ssr: true
 })
