@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<IProps>(), {
 });
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 .app-loader {
   animation: spin 2s linear infinite;
 }

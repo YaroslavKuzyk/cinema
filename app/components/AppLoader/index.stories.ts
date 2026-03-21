@@ -24,32 +24,6 @@ export const Default: Story = {
     setup() {
       return { args }
     },
-    template: '<AppLoader v-bind="args" />',
-  }),
-}
-
-export const Small: Story = {
-  args: {
-    size: 16,
-  },
-  render: (args) => ({
-    components: { AppLoader },
-    setup() {
-      return { args }
-    },
-    template: '<AppLoader v-bind="args" />',
-  }),
-}
-
-export const Large: Story = {
-  args: {
-    size: 32,
-  },
-  render: (args) => ({
-    components: { AppLoader },
-    setup() {
-      return { args }
-    },
-    template: '<AppLoader v-bind="args" />',
+    template: '<span style="color: white;"><AppLoader v-bind="args" /></span>',
   }),
 }
