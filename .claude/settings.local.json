@@ -8,7 +8,16 @@
       "Bash(npm run lint:*)",
       "Bash(npm run lint:css:*)",
       "Bash(npm run lint:css:fix:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(git config:*)",
+      "Bash(gh auth:*)",
+      "Bash(security find-internet-password:*)",
+      "Bash(security find-generic-password:*)",
+      "Bash(ls:*)",
+      "Bash(git remote set-url:*)",
+      "Bash(ssh:*)",
+      "Bash(ssh-add:*)",
+      "Bash(npm uninstall:*)"
     ]
   }
 }
