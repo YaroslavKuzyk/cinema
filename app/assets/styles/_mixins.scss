@@ -1,0 +1,76 @@
+// Typography
+
+@mixin FontDisplay {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 67.2px;
+}
+
+@mixin FontH1 {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    line-height: auto;
+}
+
+@mixin FontH2 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: auto;
+}
+
+@mixin FontH3 {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: auto;
+}
+
+@mixin FontBodyLg {
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 1.6px;
+    line-height: 32px;
+}
+    
+@mixin FontBodyMd {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: auto;
+}
+
+@mixin FontBodySm {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: auto;
+}
+
+@mixin FontCaption {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: auto;
+}
+
+@mixin FontLable {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: auto;
+}
+
+// Shadows
+@mixin ShadowSm {
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.3);
+}
+
+@mixin ShadowMd {
+    box-shadow: 0px 8px 32px 0px rgba(0, 0, 0, 0.5);
+}
+
+@mixin ShadowLg {
+    box-shadow: 0px 20px 60px 0px rgba(0, 0, 0, 0.7);
+}
+
+@mixin ShadowPrimary {
+    box-shadow: 0px 20px 60px 0px rgba($color: $primaryColor, $alpha: 0.2);
+}

@@ -1,0 +1,47 @@
+// Colors
+$primaryColor: #E50914;
+$primaryDarkColor: #B20710;
+$whiteColor:#FFFFFF;
+$backgroundColor: #0A0A0A;
+$backgroundHoverColor: rgba($color: $whiteColor, $alpha: 0.04);
+$surfaceColor: #141414;
+$surfaceAltColor: #1A1A1A;
+
+$successColor: #22C55E;
+$warningColor: #FBBF24;
+
+$textPrimaryColor: rgba($color: $whiteColor, $alpha: 0.8);
+$textSecondaryColor: rgba($color: $whiteColor, $alpha: 0.5);
+$textTertiaryColor: rgba($color: $whiteColor, $alpha: 0.35);
+
+$borderColor: rgba($color: $whiteColor, $alpha: 0.08);
+$dividerColor: rgba($color: $whiteColor, $alpha: 0.06);
+
+$primaryDarkColor: rgba($color: $primaryColor, $alpha: 0.2);
+$primaryDeepDarkColor: rgba($color: $primaryColor, $alpha: 0.1);
+
+// Spacing
+$size2Xs: 4px;
+$sizeBase: 8px;
+$sizeXs: 12px;
+$sizeSm: 16px;
+$sizeMd: 20px;
+$sizeLg: 24px;
+$sizeXl: 32px;
+$size2Xl: 40px;
+$size3Xl: 48px;
+$size4Xl: 56px;
+$size5Xl: 72px;
+
+// Border Radius
+$radius2Xs: 6px;
+$radiusXs: 8px;
+$radiusSm: 10px;
+$radiusMd: 12px;
+$radiusLg: 14px;
+$radiusXl: 16px;
+$radius2Xl: 20px;
+$radius3Xl: 24px;
+$radiusFull: 9999px;
+
+

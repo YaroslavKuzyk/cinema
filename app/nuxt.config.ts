@@ -15,12 +15,9 @@ export default defineNuxtConfig({
     ]
   },
 
-  modules: [
-    '@pinia/nuxt',
-    '@nuxtjs/i18n'
-  ],
+  modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/storybook', '@nuxt/eslint'],
 
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/styles/main.scss'],
 
   i18n: {
     locales: [

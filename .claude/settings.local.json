@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(npx storybook@latest init:*)",
+      "Bash(npm run postinstall:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run lint:css:*)",
+      "Bash(npm run lint:css:fix:*)",
+      "Bash(chmod:*)"
+    ]
+  }
+}
