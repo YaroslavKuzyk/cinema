@@ -15,20 +15,11 @@
         <span class="app-select__value">
           {{ displayValue || props.placeholder }}
         </span>
-        <span
+        <ChevronDown
           class="app-select__arrow"
           :class="{ 'app-select__arrow--open': isOpen }"
-        >
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path
-              d="M2.5 4.5L6 8L9.5 4.5"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </span>
+          :size="16"
+        />
       </button>
       <Transition name="dropdown">
         <div v-if="isOpen" class="app-select__dropdown">
@@ -67,6 +58,7 @@
 
 <script lang="ts" setup>
 import { useId, computed, ref } from "vue";
+import { ChevronDown } from "lucide-vue-next";
 import type { IProps, IOption, IValue, IEmits } from "./index.types";
 
 const props = withDefaults(defineProps<IProps>(), {

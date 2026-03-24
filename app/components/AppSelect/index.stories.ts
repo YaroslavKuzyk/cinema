@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook-vue/nuxt'
+import { ref } from 'vue'
 import AppSelect from './index.vue'
 
 const sampleOptions = [
@@ -74,97 +75,5 @@ export const Default: Story = {
       return { args, value }
     },
     template: '<AppSelect v-model="value" :options="args.options" :label="args.label" :placeholder="args.placeholder" :multiple="args.multiple" :disabled="args.disabled" :item-title="args.itemTitle" :item-value="args.itemValue" :full-object="args.fullObject" />',
-  }),
-}
-
-export const WithLabel: Story = {
-  args: {
-    label: 'Choose option',
-  },
-  render: (args) => ({
-    components: { AppSelect },
-    setup() {
-      const value = ref(args.modelValue)
-      return { args, value }
-    },
-    template: '<AppSelect v-model="value" :options="args.options" :label="args.label" :placeholder="args.placeholder" :item-title="args.itemTitle" :item-value="args.itemValue" />',
-  }),
-}
-
-export const WithSelectedValue: Story = {
-  args: {
-    modelValue: 'option2',
-    label: 'Selected option',
-  },
-  render: (args) => ({
-    components: { AppSelect },
-    setup() {
-      const value = ref(args.modelValue)
-      return { args, value }
-    },
-    template: '<AppSelect v-model="value" :options="args.options" :label="args.label" :item-title="args.itemTitle" :item-value="args.itemValue" />',
-  }),
-}
-
-export const Multiple: Story = {
-  args: {
-    modelValue: [],
-    multiple: true,
-    label: 'Select multiple',
-  },
-  render: (args) => ({
-    components: { AppSelect },
-    setup() {
-      const value = ref(args.modelValue)
-      return { args, value }
-    },
-    template: '<AppSelect v-model="value" :options="args.options" :label="args.label" :multiple="args.multiple" :item-title="args.itemTitle" :item-value="args.itemValue" />',
-  }),
-}
-
-export const MultipleWithSelected: Story = {
-  args: {
-    modelValue: ['option1', 'option3'],
-    multiple: true,
-    label: 'Multiple selected',
-  },
-  render: (args) => ({
-    components: { AppSelect },
-    setup() {
-      const value = ref(args.modelValue)
-      return { args, value }
-    },
-    template: '<AppSelect v-model="value" :options="args.options" :label="args.label" :multiple="args.multiple" :item-title="args.itemTitle" :item-value="args.itemValue" />',
-  }),
-}
-
-export const PrimitiveOptions: Story = {
-  args: {
-    options: ['Apple', 'Banana', 'Cherry', 'Date'],
-    label: 'Select fruit',
-  },
-  render: (args) => ({
-    components: { AppSelect },
-    setup() {
-      const value = ref(args.modelValue)
-      return { args, value }
-    },
-    template: '<AppSelect v-model="value" :options="args.options" :label="args.label" />',
-  }),
-}
-
-export const Disabled: Story = {
-  args: {
-    modelValue: 'option1',
-    disabled: true,
-    label: 'Disabled select',
-  },
-  render: (args) => ({
-    components: { AppSelect },
-    setup() {
-      const value = ref(args.modelValue)
-      return { args, value }
-    },
-    template: '<AppSelect v-model="value" :options="args.options" :label="args.label" :disabled="args.disabled" :item-title="args.itemTitle" :item-value="args.itemValue" />',
   }),
 }

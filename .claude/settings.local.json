@@ -31,7 +31,8 @@
       "Bash(pnpm run test:*)",
       "Bash(yarn test:*)",
       "Bash(bun test:*)",
-      "Bash(pnpm test:*)"
+      "Bash(pnpm test:*)",
+      "Bash(npx vue-tsc:*)"
     ]
   }
 }
