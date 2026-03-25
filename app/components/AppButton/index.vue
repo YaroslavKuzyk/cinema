@@ -109,6 +109,30 @@ const getLoaderSize = computed(() => {
     }
   }
 
+  &--transparent {
+    background: transparent;
+    border-color: $borderColor;
+    color: $textSecondaryColor;
+  }
+
+  &--success {
+    background: $successBgColor;
+    border-color: rgba($color: $successColor, $alpha: 0.2);
+    color: $successColor;
+  }
+
+  &--info {
+    background: $infoBgColor;
+    border-color: rgba($color: $infoColor, $alpha: 0.2);
+    color: $infoColor;
+  }
+
+  &--purple {
+    background: $purpleBgColor;
+    border-color: rgba($color: $purpleColor, $alpha: 0.2);
+    color: $purpleColor;
+  }
+
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     outline: 3px solid $whiteColor;

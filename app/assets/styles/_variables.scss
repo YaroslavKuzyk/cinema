@@ -9,6 +9,7 @@ $surfaceAltColor: #1A1A1A;
 
 $successColor: #22C55E;
 $warningColor: #FBBF24;
+$dangerColor: #EF4444;
 
 $textPrimaryColor: rgba($color: $whiteColor, $alpha: 0.8);
 $textSecondaryColor: rgba($color: $whiteColor, $alpha: 0.5);
@@ -21,6 +22,14 @@ $placeholderColor: #757575;
 
 $primaryDarkColor: rgba($color: $primaryColor, $alpha: 0.2);
 $primaryDeepDarkColor: rgba($color: $primaryColor, $alpha: 0.1);
+
+$infoColor: #3B82F6;
+$purpleColor: #A855F7;
+$sidebarColor: #111111; 
+$activeBgColor: rgba($color: $primaryColor, $alpha: 0.08);
+$successBgColor: rgba($color: $successColor, $alpha: 0.15);
+$infoBgColor: rgba($color: $infoColor, $alpha: 0.15);
+$purpleBgColor: rgba($color: $purpleColor, $alpha: 0.12);
 
 // Spacing
 $size2Xs: 4px;

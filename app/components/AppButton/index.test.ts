@@ -23,6 +23,16 @@ describe('AppButton', () => {
     expect(wrapper.classes()).toContain('app-button--secondary')
   })
 
+  it.each(['primary', 'secondary', 'danger', 'success', 'info', 'purple', 'transparent'] as const)(
+    'applies %s variant class',
+    (variant) => {
+      const wrapper = mount(AppButton, {
+        props: { variant },
+      })
+      expect(wrapper.classes()).toContain(`app-button--${variant}`)
+    }
+  )
+
   it('applies size class based on prop', () => {
     const wrapper = mount(AppButton, {
       props: { size: 'small' },
