@@ -72,8 +72,8 @@ const getLoaderSize = computed(() => {
   }
 
   &--secondary {
-    background: rgba($color: $whiteColor, $alpha: 0.1);
-    border-color: rgba($color: $whiteColor, $alpha: 0.15);
+    background: rgba($whiteColor, 0.1);
+    border-color: rgba($whiteColor, 0.15);
   }
 
   &--danger {
@@ -117,19 +117,19 @@ const getLoaderSize = computed(() => {
 
   &--success {
     background: $successBgColor;
-    border-color: rgba($color: $successColor, $alpha: 0.2);
+    border-color: rgba($successColor, 0.2);
     color: $successColor;
   }
 
   &--info {
     background: $infoBgColor;
-    border-color: rgba($color: $infoColor, $alpha: 0.2);
+    border-color: rgba($infoColor, 0.2);
     color: $infoColor;
   }
 
   &--purple {
     background: $purpleBgColor;
-    border-color: rgba($color: $purpleColor, $alpha: 0.2);
+    border-color: rgba($purpleColor, 0.2);
     color: $purpleColor;
   }
 

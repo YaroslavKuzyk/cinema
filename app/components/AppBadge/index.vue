@@ -51,32 +51,32 @@ const props = withDefaults(defineProps<IProps>(), {
   }
 
   &--primary {
-    background: rgba($color: $primaryColor, $alpha: 0.12);
+    background: $primaryBgColor;
     color: $primaryColor;
   }
 
   &--danger {
-    background: rgba($color: $dangerColor, $alpha: 0.15);
+    background: $dangerBgColor;
     color: $dangerColor;
   }
 
   &--success {
-    background: rgba($color: $successColor, $alpha: 0.15);
+    background: $successBgColor;
     color: $successColor;
   }
 
   &--info {
-    background: rgba($color: $infoColor, $alpha: 0.15);
+    background: $infoBgColor;
     color: $infoColor;
   }
 
   &--purple {
-    background: rgba($color: $purpleColor, $alpha: 0.12);
+    background: $purpleBgColor;
     color: $purpleColor;
   }
 
   &--warning {
-    background: rgba($color: $warningColor, $alpha: 0.15);
+    background: $warningBgColor;
     color: $warningColor;
   }
 }

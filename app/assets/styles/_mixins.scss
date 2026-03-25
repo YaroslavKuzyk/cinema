@@ -52,7 +52,7 @@
     line-height: auto;
 }
 
-@mixin FontLable {
+@mixin FontLabel {
     font-size: 14px;
     font-weight: 700;
     line-height: auto;
@@ -72,5 +72,5 @@
 }
 
 @mixin ShadowPrimary {
-    box-shadow: 0px 20px 60px 0px rgba($color: $primaryColor, $alpha: 0.2);
+    box-shadow: 0px 20px 60px 0px rgba($primaryColor, 0.2);
 }

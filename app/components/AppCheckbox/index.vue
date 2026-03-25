@@ -37,7 +37,7 @@ const isActive = useModel(props, "modelValue");
   &__button {
     align-items: center;
     background: $dividerColor;
-    border: 2px solid rgba($color: $whiteColor, $alpha: 0.15);
+    border: 2px solid rgba($whiteColor, 0.15);
     border-radius: $radius2Xs;
     color: $whiteColor;
     display: flex;
@@ -63,7 +63,7 @@ const isActive = useModel(props, "modelValue");
   }
 
   &__label {
-    @include FontLable;
+    @include FontLabel;
     color: $textSecondaryColor;
   }
 }

@@ -209,7 +209,7 @@ onUnmounted(() => {
   }
 
   &__label {
-    @include FontLable;
+    @include FontLabel;
     color: $textSecondaryColor;
   }
 
@@ -294,7 +294,7 @@ onUnmounted(() => {
     }
 
     &--selected {
-      background-color: $primaryDarkColor;
+      background-color: $primaryBgHoverColor;
       color: $whiteColor;
     }
   }

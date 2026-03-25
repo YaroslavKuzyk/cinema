@@ -1,37 +1,53 @@
-// Colors
+// ==========================================================================
+// Colors - Base
+// ==========================================================================
 $primaryColor: #E50914;
-$primaryDarkColor: #B20710;
-$whiteColor:#FFFFFF;
-$backgroundColor: #0A0A0A;
-$backgroundHoverColor: rgba($color: $whiteColor, $alpha: 0.04);
-$surfaceColor: #141414;
-$surfaceAltColor: #1A1A1A;
-
+$primaryHoverColor: #B20710;
+$whiteColor: #FFFFFF;
+$infoColor: #3B82F6;
+$purpleColor: #A855F7;
 $successColor: #22C55E;
 $warningColor: #FBBF24;
 $dangerColor: #EF4444;
 
-$textPrimaryColor: rgba($color: $whiteColor, $alpha: 0.8);
-$textSecondaryColor: rgba($color: $whiteColor, $alpha: 0.5);
-$textTertiaryColor: rgba($color: $whiteColor, $alpha: 0.35);
+// ==========================================================================
+// Colors - Background
+// ==========================================================================
+$backgroundColor: #0A0A0A;
+$backgroundHoverColor: rgba($whiteColor, 0.04);
+$surfaceColor: #141414;
+$surfaceAltColor: #1A1A1A;
+$sidebarColor: #111111;
 
-$borderColor: rgba($color: $whiteColor, $alpha: 0.08);
-$dividerColor: rgba($color: $whiteColor, $alpha: 0.06);
+// ==========================================================================
+// Colors - Background Variants (for badges, alerts, etc.)
+// ==========================================================================
+$primaryBgColor: rgba($primaryColor, 0.1);
+$primaryBgHoverColor: rgba($primaryColor, 0.2);
+$activeBgColor: rgba($primaryColor, 0.08);
+$successBgColor: rgba($successColor, 0.15);
+$warningBgColor: rgba($warningColor, 0.15);
+$dangerBgColor: rgba($dangerColor, 0.15);
+$infoBgColor: rgba($infoColor, 0.15);
+$purpleBgColor: rgba($purpleColor, 0.12);
 
+// ==========================================================================
+// Colors - Text
+// ==========================================================================
+$textPrimaryColor: rgba($whiteColor, 0.8);
+$textSecondaryColor: rgba($whiteColor, 0.5);
+$textTertiaryColor: rgba($whiteColor, 0.35);
 $placeholderColor: #757575;
 
-$primaryDarkColor: rgba($color: $primaryColor, $alpha: 0.2);
-$primaryDeepDarkColor: rgba($color: $primaryColor, $alpha: 0.1);
+// ==========================================================================
+// Colors - Border & Divider
+// ==========================================================================
+$borderColor: rgba($whiteColor, 0.08);
+$dividerColor: rgba($whiteColor, 0.06);
 
-$infoColor: #3B82F6;
-$purpleColor: #A855F7;
-$sidebarColor: #111111; 
-$activeBgColor: rgba($color: $primaryColor, $alpha: 0.08);
-$successBgColor: rgba($color: $successColor, $alpha: 0.15);
-$infoBgColor: rgba($color: $infoColor, $alpha: 0.15);
-$purpleBgColor: rgba($color: $purpleColor, $alpha: 0.12);
-
+// ==========================================================================
 // Spacing
+// ==========================================================================
 $size2Xs: 4px;
 $sizeBase: 8px;
 $sizeXs: 12px;
@@ -44,7 +60,9 @@ $size3Xl: 48px;
 $size4Xl: 56px;
 $size5Xl: 72px;
 
+// ==========================================================================
 // Border Radius
+// ==========================================================================
 $radius2Xs: 6px;
 $radiusXs: 8px;
 $radiusSm: 10px;
@@ -54,5 +72,3 @@ $radiusXl: 16px;
 $radius2Xl: 20px;
 $radius3Xl: 24px;
 $radiusFull: 9999px;
-
-

@@ -32,7 +32,7 @@ const value = useModel(props, "modelValue");
   gap: 8px;
 
   &__label {
-    @include FontLable;
+    @include FontLabel;
     color: $textSecondaryColor;
   }
 
@@ -72,7 +72,6 @@ const value = useModel(props, "modelValue");
     }
 
     &[type="number"] {
-      appearance: textfield;
       appearance: textfield;
     }
   }

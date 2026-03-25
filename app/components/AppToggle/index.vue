@@ -32,7 +32,7 @@ const isActive = useModel(props, "modelValue");
   outline: 3px solid transparent;
 
   &__button {
-    background: rgba($color: $whiteColor, $alpha: 0.15);
+    background: rgba($whiteColor, 0.15);
     border: none;
     border-radius: $radiusLg;
     height: 26px;
@@ -74,7 +74,7 @@ const isActive = useModel(props, "modelValue");
   }
 
   &__label {
-    @include FontLable;
+    @include FontLabel;
     color: $textSecondaryColor;
   }
 }

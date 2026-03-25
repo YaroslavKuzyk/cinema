@@ -49,22 +49,22 @@ const iconComponent = computed(() => {
   }
 
   &--info {
-    background: rgba($color: $infoColor, $alpha: 0.1);
+    background: $infoBgColor;
     color: $infoColor;
   }
 
   &--warning {
-    background: rgba($color: $warningColor, $alpha: 0.1);
+    background: $warningBgColor;
     color: $warningColor;
   }
 
   &--danger {
-    background: rgba($color: $dangerColor, $alpha: 0.1);
+    background: $dangerBgColor;
     color: $dangerColor;
   }
 
   &--success {
-    background: rgba($color: $successColor, $alpha: 0.1);
+    background: $successBgColor;
     color: $successColor;
   }
 }

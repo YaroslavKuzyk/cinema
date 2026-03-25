@@ -67,7 +67,7 @@ const isOpen = computed({
 
   &__overlay {
     backdrop-filter: blur(4px);
-    background: rgba($color: $backgroundColor, $alpha: 0.8);
+    background: rgba($backgroundColor, 0.8);
   }
 
   &__container {

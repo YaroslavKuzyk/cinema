@@ -76,38 +76,38 @@ const removeTag = (id: string | number) => {
   }
 
   &__tag--primary {
-    background: rgba($color: $primaryColor, $alpha: 0.12);
-    border-color: rgba($color: $primaryColor, $alpha: 0.2);
+    background: $primaryBgColor;
+    border-color: $primaryBgHoverColor;
     color: $primaryColor;
   }
 
   &__tag--danger {
-    background: rgba($color: $dangerColor, $alpha: 0.15);
-    border-color: rgba($color: $dangerColor, $alpha: 0.2);
+    background: $dangerBgColor;
+    border-color: rgba($dangerColor, 0.2);
     color: $dangerColor;
   }
 
   &__tag--success {
-    background: rgba($color: $successColor, $alpha: 0.15);
-    border-color: rgba($color: $successColor, $alpha: 0.2);
+    background: $successBgColor;
+    border-color: rgba($successColor, 0.2);
     color: $successColor;
   }
 
   &__tag--info {
-    background: rgba($color: $infoColor, $alpha: 0.15);
-    border-color: rgba($color: $infoColor, $alpha: 0.2);
+    background: $infoBgColor;
+    border-color: rgba($infoColor, 0.2);
     color: $infoColor;
   }
 
   &__tag--purple {
-    background: rgba($color: $purpleColor, $alpha: 0.12);
-    border-color: rgba($color: $purpleColor, $alpha: 0.2);
+    background: $purpleBgColor;
+    border-color: rgba($purpleColor, 0.2);
     color: $purpleColor;
   }
 
   &__tag--warning {
-    background: rgba($color: $warningColor, $alpha: 0.15);
-    border-color: rgba($color: $warningColor, $alpha: 0.2);
+    background: $warningBgColor;
+    border-color: rgba($warningColor, 0.2);
     color: $warningColor;
   }
 
