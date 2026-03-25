@@ -32,7 +32,10 @@
       "Bash(yarn test:*)",
       "Bash(bun test:*)",
       "Bash(pnpm test:*)",
-      "Bash(npx vue-tsc:*)"
+      "Bash(npx vue-tsc:*)",
+      "Bash(export:*)",
+      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
+      "Bash(. \"$NVM_DIR/nvm.sh\")"
     ]
   }
 }

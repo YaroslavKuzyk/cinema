@@ -17,7 +17,7 @@ export default defineNuxtConfig({
 
   modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxt/eslint'],
 
-  css: ['~/assets/styles/main.scss'],
+  css: ['~/assets/styles/main.scss', 'vue-final-modal/style.css'],
 
   vite: {
     css: {
