@@ -7,10 +7,13 @@
         { 'app-checkbox__button--disabled': disabled },
       ]"
       :disabled="disabled"
+      @click="isActive = !isActive"
     >
       <Check v-if="isActive" class="app-checkbox__icon" />
     </button>
-    <span v-if="label" class="app-checkbox__label">{{ label }}</span>
+    <span v-if="label || $slots.default" class="app-checkbox__label">
+      <slot>{{ label }}</slot>
+    </span>
   </div>
 </template>
 
@@ -28,10 +31,10 @@ const isActive = useModel(props, "modelValue");
 
 <style lang="scss" scoped>
 .app-checkbox {
-  align-items: center;
+  align-items: flex-start;
   border: none;
   display: flex;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-sm);
   outline: 3px solid transparent;
 
   &__button {
@@ -41,8 +44,10 @@ const isActive = useModel(props, "modelValue");
     border-radius: var(--radius-2xs);
     color: var(--color-white);
     display: flex;
+    flex-shrink: 0;
     height: var(--spacing-lg);
     justify-content: center;
+    margin-top: fluid(2px, 4px);
     transition: background-color 0.3s ease;
     width: var(--spacing-lg);
 

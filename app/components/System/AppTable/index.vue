@@ -162,7 +162,7 @@ const toggleSelectAll = () => {
       @include FluidFontCaption;
       color: var(--color-text-secondary);
       font-weight: 600;
-      letter-spacing: 0.5px;
+      letter-spacing: fluid(0.5px, 1px);
       text-transform: uppercase;
     }
 

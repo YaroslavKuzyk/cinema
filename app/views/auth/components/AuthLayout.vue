@@ -30,7 +30,7 @@ defineProps<Props>();
   padding: var(--spacing-lg);
 
   &__card {
-    max-width: var(--container-sm);
+    max-width: var(--container-md);
     width: 100%;
   }
 

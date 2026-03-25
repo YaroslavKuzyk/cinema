@@ -3,30 +3,31 @@
 // ==========================================================================
 // Responsive Design System
 // ==========================================================================
-// Fluid scaling between min viewport (768px) and max viewport (2560px)
+// Fluid scaling between min viewport (1440px) and max viewport (2560px)
 // Uses clamp() for smooth scaling across all screen sizes
+// Below 1440px values stay at minimum, above 2560px values stay at maximum
 
 // Viewport breakpoints
-$viewport-min: 768px;
+$viewport-min: 1440px;
 $viewport-max: 2560px;
 
 // ==========================================================================
 // Fluid Size Function
 // ==========================================================================
 // Creates a fluid value that scales between min and max based on viewport
-// @param $min - minimum value (at 768px viewport)
+// @param $min - minimum value (at 1440px viewport)
 // @param $max - maximum value (at 2560px viewport)
 @function fluid($min, $max) {
   $min-val: math.div($min, 1px);
   $max-val: math.div($max, 1px);
-  $slope: math.div(($max-val - $min-val), (2560 - 768)) * 100;
-  $intersection: $min-val - math.div(($slope * 768), 100);
+  $slope: math.div(($max-val - $min-val), (2560 - 1440)) * 100;
+  $intersection: $min-val - math.div(($slope * 1440), 100);
 
   @return clamp(#{$min}, calc(#{$intersection}px + #{$slope}vw), #{$max});
 }
 
 // ==========================================================================
-// Fluid Spacing Scale
+// Fluid Spacing Scale (2x ratio: min at 1440px, max at 4K)
 // ==========================================================================
 $fluid-size-2xs: fluid(4px, 8px);
 $fluid-size-xs: fluid(8px, 16px);
@@ -133,7 +134,7 @@ $fluid-radius-3xl: fluid(20px, 40px);
 // ==========================================================================
 $fluid-container-xs: fluid(280px, 480px);
 $fluid-container-sm: fluid(360px, 640px);
-$fluid-container-md: fluid(480px, 800px);
+$fluid-container-md: fluid(460px, 800px);
 $fluid-container-lg: fluid(640px, 1024px);
 $fluid-container-xl: fluid(800px, 1280px);
 
@@ -143,4 +144,3 @@ $fluid-container-xl: fluid(800px, 1280px);
 $fluid-input-sm: fluid(32px, 48px);
 $fluid-input-md: fluid(40px, 60px);
 $fluid-input-lg: fluid(48px, 72px);
-

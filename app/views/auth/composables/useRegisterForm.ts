@@ -1,6 +1,5 @@
 import { useForm } from 'vee-validate'
 import { toTypedSchema } from '@vee-validate/zod'
-import { EUserType } from '~/domain'
 import { registerSchema, type RegisterFormValues } from '../domain'
 
 export function useRegisterForm() {
@@ -16,13 +15,13 @@ export function useRegisterForm() {
   const form = useForm<RegisterFormValues>({
     validationSchema: toTypedSchema(registerSchema),
     initialValues: {
-      email: '',
-      phoneNumber: '',
       firstName: '',
       lastName: '',
-      userType: EUserType.CUSTOMER,
+      email: '',
+      phoneNumber: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      termsAccepted: false
     }
   })
 
@@ -31,12 +30,13 @@ export function useRegisterForm() {
     error.value = null
 
     try {
-      const { confirmPassword, ...payload } = values
+      const { confirmPassword, termsAccepted, ...payload } = values
       const response = await authApi.register(payload)
       authStore.setAuth(response.accessToken, response.user)
       router.push(localePath('/dashboard'))
-    } catch (e: any) {
-      error.value = e.data?.message || e.message || t('AUTH_REGISTER_FAILED')
+    } catch (e: unknown) {
+      const err = e as { data?: { message?: string }; message?: string }
+      error.value = err.data?.message || err.message || t('AUTH_REGISTER_FAILED')
     } finally {
       isLoading.value = false
     }
@@ -47,6 +47,5 @@ export function useRegisterForm() {
     isLoading: readonly(isLoading),
     error: readonly(error),
     onSubmit,
-    EUserType
   }
 }

@@ -66,7 +66,7 @@ const isOpen = computed({
   justify-content: center;
 
   &__overlay {
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(fluid(4px, 8px));
     background: var(--color-background-80);
   }
 

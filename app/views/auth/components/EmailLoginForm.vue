@@ -1,6 +1,6 @@
 <template>
   <div class="email-login-form">
-    <AuthFormField :label="$t('EMAIL')" stretch>
+    <AuthFormField :label="$t('EMAIL')">
       <AppInput
         v-model="email"
         type="email"
@@ -8,7 +8,7 @@
       />
     </AuthFormField>
 
-    <AuthFormField :label="$t('PASSWORD')" stretch>
+    <AuthFormField :label="$t('PASSWORD')">
       <AppInput
         v-model="password"
         type="password"

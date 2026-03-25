@@ -1,7 +1,7 @@
 <template>
   <div class="auth-form-field">
     <label v-if="label" class="auth-form-field__label">{{ label }}</label>
-    <div class="auth-form-field__content" :class="{ 'auth-form-field__content--stretch': stretch }">
+    <div class="auth-form-field__content">
       <slot />
     </div>
   </div>
@@ -10,12 +10,10 @@
 <script setup lang="ts">
 interface Props {
   label?: string;
-  stretch?: boolean;
 }
 
 withDefaults(defineProps<Props>(), {
   label: "",
-  stretch: false,
 });
 </script>
 
@@ -33,10 +31,6 @@ withDefaults(defineProps<Props>(), {
   &__content {
     display: flex;
     gap: var(--spacing-xs);
-
-    &--stretch > :deep(*) {
-      flex: 1;
-    }
   }
 }
 </style>

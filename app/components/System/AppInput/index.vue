@@ -1,5 +1,5 @@
 <template>
-  <div class="app-input" :class="{ 'app-input--stretch': stretch }" :style="width ? { width, flexShrink: 0 } : undefined">
+  <div class="app-input" :style="width ? { width, flexShrink: 0 } : undefined">
     <label v-if="label" :for="inputId" class="app-input__label">{{
       label
     }}</label>
@@ -22,7 +22,6 @@ import type { IProps } from "./index.types";
 const props = withDefaults(defineProps<IProps>(), {
   label: "",
   readonly: false,
-  stretch: false,
 });
 
 const inputId = useId();
@@ -34,10 +33,7 @@ const value = useModel(props, "modelValue");
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
-
-  &--stretch {
-    flex: 1;
-  }
+  width: 100%;
 
   &__label {
     @include FluidFontLabel;

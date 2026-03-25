@@ -23,8 +23,8 @@ const { toasts, remove } = useToast();
 .app-toast-container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  padding: 24px;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-lg);
   position: fixed;
   right: 0;
   top: 0;

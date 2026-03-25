@@ -5,7 +5,6 @@
       <AppInput
         v-model="phoneNumber"
         :placeholder="$t('PHONE_NUMBER_PLACEHOLDER')"
-        stretch
       />
     </AuthFormField>
 
@@ -57,7 +56,7 @@ const fullPhoneNumber = computed(() => `+380${phoneNumber.value}`);
 .phone-login-form {
   :deep(.phone-login-form__prefix) {
     flex-shrink: 0;
-    width: 100px;
+    width: fluid(80px, 120px);
   }
 
   &__code {

@@ -50,7 +50,7 @@ const iconComponent = computed(() => {
 
   &__icon {
     flex-shrink: 0;
-    margin-top: 2px;
+    margin-top: fluid(2px, 4px);
   }
 
   &__content {

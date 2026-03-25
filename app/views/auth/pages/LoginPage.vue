@@ -43,7 +43,7 @@
 
     <template #footer>
       <span>{{ $t("HAVE_NO_ACCOUNT") }}</span>
-      <NuxtLink :to="localePath('/auth/register')" class="app-link">
+      <NuxtLink :to="localePath('/register')" class="app-link">
         {{ $t("REGISTERATION") }}
       </NuxtLink>
     </template>

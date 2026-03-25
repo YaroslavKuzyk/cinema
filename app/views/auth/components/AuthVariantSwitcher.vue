@@ -38,7 +38,7 @@ defineEmits<{
   border-radius: var(--radius-lg);
   display: flex;
   margin-bottom: var(--spacing-lg);
-  padding: 4px;
+  padding: var(--spacing-2xs);
 
   .app-button {
     flex: 1;

@@ -40,7 +40,7 @@ const iconComponent = computed(() => {
 
   &__icon {
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: fluid(1px, 2px);
   }
 
   &__text {

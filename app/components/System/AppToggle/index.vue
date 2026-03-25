@@ -45,7 +45,7 @@ const isActive = useModel(props, "modelValue");
       border-radius: var(--radius-full);
       content: "";
       height: var(--spacing-md);
-      left: 3px;
+      left: fluid(3px, 6px);
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -64,7 +64,7 @@ const isActive = useModel(props, "modelValue");
 
     &::before {
       left: auto;
-      right: 3px;
+      right: fluid(3px, 6px);
     }
   }
 
