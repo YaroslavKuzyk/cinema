@@ -5,6 +5,7 @@
         <AppInput
           v-model="firstName"
           :placeholder="$t('FIRST_NAME_PLACEHOLDER')"
+          autocomplete="given-name"
         />
       </AuthFormField>
 
@@ -12,6 +13,7 @@
         <AppInput
           v-model="lastName"
           :placeholder="$t('LAST_NAME_PLACEHOLDER')"
+          autocomplete="family-name"
         />
       </AuthFormField>
     </div>
@@ -29,6 +31,7 @@
       <AppInput
         v-model="phoneNumber"
         :placeholder="$t('PHONE_NUMBER_PLACEHOLDER')"
+        autocomplete="tel"
       />
     </AuthFormField>
 
@@ -37,6 +40,7 @@
         v-model="password"
         type="password"
         :placeholder="$t('PASSWORD_PLACEHOLDER')"
+        autocomplete="new-password"
       />
     </AuthFormField>
 
@@ -45,6 +49,7 @@
         v-model="confirmPassword"
         type="password"
         :placeholder="$t('CONFIRM_PASSWORD_PLACEHOLDER')"
+        autocomplete="new-password"
       />
     </AuthFormField>
 

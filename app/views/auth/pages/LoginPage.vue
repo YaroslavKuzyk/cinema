@@ -18,28 +18,30 @@
       ]"
     />
 
-    <PhoneLoginForm
-      v-if="loginVariant === 'phone'"
-      v-model:phone-number="form.values.phoneNumber"
-      v-model:code="form.values.code"
-      :code-sent="codeSent"
-      @submit="onSubmit"
-      @send-code="sendCode"
-    />
+    <form class="login-page__form" @submit.prevent="onSubmit">
+      <PhoneLoginForm
+        v-if="loginVariant === 'phone'"
+        v-model:phone-number="form.values.phoneNumber"
+        v-model:code="form.values.code"
+        :code-sent="codeSent"
+        @submit="onSubmit"
+        @send-code="sendCode"
+      />
 
-    <EmailLoginForm
-      v-else
-      v-model:email="form.values.email"
-      v-model:password="form.values.password"
-    />
+      <EmailLoginForm
+        v-else
+        v-model:email="form.values.email"
+        v-model:password="form.values.password"
+      />
 
-    <AppButton
-      class="login-page__submit"
-      :loading="isLoading"
-      @click="onSubmit"
-    >
-      {{ $t("LOGIN") }}
-    </AppButton>
+      <AppButton
+        type="submit"
+        class="login-page__submit"
+        :loading="isLoading"
+      >
+        {{ $t("LOGIN") }}
+      </AppButton>
+    </form>
 
     <template #footer>
       <span>{{ $t("HAVE_NO_ACCOUNT") }}</span>
@@ -61,10 +63,17 @@ import { useLoginForm } from "../composables";
 
 const localePath = useLocalePath();
 const router = useRouter();
+const route = useRoute();
 
 const { form, isLoading, codeSent, sendCode, onSubmit } = useLoginForm();
 
-const loginVariant = ref<"phone" | "email">("phone");
+const loginVariant = ref<"phone" | "email">(
+  (route.query.method as "phone" | "email") || "phone"
+);
+
+watch(loginVariant, (value) => {
+  router.replace({ query: { ...route.query, method: value } });
+});
 
 const onAuthTypeChange = (value: string) => {
   if (value === "register") {

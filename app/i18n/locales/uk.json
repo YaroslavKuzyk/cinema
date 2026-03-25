@@ -28,7 +28,20 @@
   "HAVE_ACCOUNT": "Вже є акаунт?",
   "REGISTERATION": "Зареєструватись",
   "FORGOT_PASSWORD": "Забули пароль?",
+  "FORGOT_PASSWORD_TITLE": "Забули пароль?",
+  "FORGOT_PASSWORD_SUBTITLE": "Введіть email, який ви використовували при реєстрації. Ми надішлемо посилання для відновлення паролю.",
+  "FORGOT_PASSWORD_SUCCESS": "Посилання для відновлення паролю надіслано на вашу пошту",
+  "SEND_RESET_LINK": "Надіслати посилання",
+  "BACK_TO_LOGIN": "Повернутись до входу",
+  "RESET_PASSWORD_TITLE": "Новий пароль",
+  "RESET_PASSWORD_SUBTITLE": "Створіть новий пароль для вашого акаунту. Переконайтесь, що він надійний та відрізняється від попереднього.",
+  "NEW_PASSWORD": "Новий пароль",
+  "RESET_PASSWORD_SUCCESS": "Пароль успішно змінено",
+  "SAVE_PASSWORD": "Зберегти пароль",
+  "GO_TO_LOGIN": "Перейти до входу",
+  "INVALID_RESET_TOKEN": "Недійсне посилання для відновлення паролю",
   "AUTH_SEND_CODE_FAILED": "Не вдалося відправити код",
   "AUTH_LOGIN_FAILED": "Помилка входу",
-  "AUTH_REGISTER_FAILED": "Помилка реєстрації"
+  "AUTH_REGISTER_FAILED": "Помилка реєстрації",
+  "PAGE_IN_DEVELOPMENT": "Сторінка в розробці"
 }

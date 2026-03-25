@@ -10,23 +10,25 @@
       @update:model-value="onAuthTypeChange"
     />
 
-    <RegisterForm
-      v-model:first-name="form.values.firstName"
-      v-model:last-name="form.values.lastName"
-      v-model:email="form.values.email"
-      v-model:phone-number="form.values.phoneNumber"
-      v-model:password="form.values.password"
-      v-model:confirm-password="form.values.confirmPassword"
-      v-model:terms-accepted="form.values.termsAccepted"
-    />
+    <form class="register-page__form" @submit.prevent="onSubmit">
+      <RegisterForm
+        v-model:first-name="form.values.firstName"
+        v-model:last-name="form.values.lastName"
+        v-model:email="form.values.email"
+        v-model:phone-number="form.values.phoneNumber"
+        v-model:password="form.values.password"
+        v-model:confirm-password="form.values.confirmPassword"
+        v-model:terms-accepted="form.values.termsAccepted"
+      />
 
-    <AppButton
-      class="register-page__submit"
-      :loading="isLoading"
-      @click="onSubmit"
-    >
-      {{ $t("REGISTERATION") }}
-    </AppButton>
+      <AppButton
+        type="submit"
+        class="register-page__submit"
+        :loading="isLoading"
+      >
+        {{ $t("REGISTERATION") }}
+      </AppButton>
+    </form>
 
     <template #footer>
       <span>{{ $t("HAVE_ACCOUNT") }}</span>

@@ -4,3 +4,5 @@ export { default as AuthFormField } from "./AuthFormField.vue";
 export { default as PhoneLoginForm } from "./PhoneLoginForm.vue";
 export { default as EmailLoginForm } from "./EmailLoginForm.vue";
 export { default as RegisterForm } from "./RegisterForm.vue";
+export { default as ForgotPasswordForm } from "./ForgotPasswordForm.vue";
+export { default as ResetPasswordForm } from "./ResetPasswordForm.vue";

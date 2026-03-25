@@ -18,11 +18,11 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxt/eslint'],
 
   components: [
-    { path: '~/components/System', pathPrefix: false },
+    { path: '~/components/System', pathPrefix: false, ignore: ['**/*.types.ts', '**/*.test.ts', '**/*.stories.ts'] },
     '~/components',
   ],
 
-  css: ['~/assets/styles/main.scss', 'vue-final-modal/style.css'],
+  css: ['~/assets/styles/main.scss'],
 
   vite: {
     css: {

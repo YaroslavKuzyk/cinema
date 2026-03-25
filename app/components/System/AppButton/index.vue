@@ -71,6 +71,9 @@ const getLoaderSize = computed(() => {
   transition: all 0.3s ease;
 
   &__content {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-xs);
     transition: opacity 0.2s ease;
   }
 

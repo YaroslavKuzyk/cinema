@@ -5,6 +5,7 @@
         v-model="email"
         type="email"
         :placeholder="$t('EMAIL_PLACEHOLDER')"
+        autocomplete="email"
       />
     </AuthFormField>
 
@@ -13,11 +14,12 @@
         v-model="password"
         type="password"
         :placeholder="$t('PASSWORD_PLACEHOLDER')"
+        autocomplete="current-password"
       />
     </AuthFormField>
 
     <div class="email-login-form__actions">
-      <NuxtLink :to="localePath('/auth/forgot-password')" class="app-link">
+      <NuxtLink :to="localePath('/forgot-password')" class="app-link">
         {{ $t("FORGOT_PASSWORD") }}
       </NuxtLink>
     </div>
