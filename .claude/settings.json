@@ -1,11 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm install:*)",
-      "Bash(npx nuxt:*)"
-    ],
-    "additionalDirectories": [
-      "/home/yaroslav/Стільниця/cinema/app"
-    ]
-  }
+        "Bash",
+        "Read",
+        "Edit",
+        "Write",
+        "WebFetch",
+        "Grep",
+        "Glob",
+        "LS",
+        "MultiEdit",
+        "NotebookRead",
+        "NotebookEdit",
+        "TodoRead",
+        "TodoWrite",
+        "WebSearch"
+      ]
+    }
 }

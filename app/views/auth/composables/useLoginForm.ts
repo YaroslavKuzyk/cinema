@@ -11,14 +11,37 @@ export function useLoginForm() {
 
   const isLoading = ref(false)
   const error = ref<string | null>(null)
+  const codeSent = ref(false)
+  const isSendingCode = ref(false)
 
   const form = useForm<LoginFormValues>({
     validationSchema: toTypedSchema(loginSchema),
     initialValues: {
+      phoneNumber: '',
+      code: '',
       email: '',
-      password: ''
+      password: '',
     }
   })
+
+  const sendCode = async () => {
+    if (!form.values.phoneNumber) return
+
+    isSendingCode.value = true
+    error.value = null
+
+    try {
+      // TODO: Implement authApi.sendCode when backend is ready
+      // await authApi.sendCode({ phoneNumber: `+380${form.values.phoneNumber}` })
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      codeSent.value = true
+    } catch (e: unknown) {
+      const err = e as { data?: { message?: string }; message?: string }
+      error.value = err.data?.message || err.message || t('AUTH_SEND_CODE_FAILED')
+    } finally {
+      isSendingCode.value = false
+    }
+  }
 
   const onSubmit = form.handleSubmit(async (values) => {
     isLoading.value = true
@@ -28,8 +51,9 @@ export function useLoginForm() {
       const response = await authApi.login(values)
       authStore.setAuth(response.accessToken, response.user)
       router.push(localePath('/dashboard'))
-    } catch (e: any) {
-      error.value = e.data?.message || e.message || t('AUTH_LOGIN_FAILED')
+    } catch (e: unknown) {
+      const err = e as { data?: { message?: string }; message?: string }
+      error.value = err.data?.message || err.message || t('AUTH_LOGIN_FAILED')
     } finally {
       isLoading.value = false
     }
@@ -38,7 +62,10 @@ export function useLoginForm() {
   return {
     form,
     isLoading: readonly(isLoading),
+    isSendingCode: readonly(isSendingCode),
+    codeSent: readonly(codeSent),
     error: readonly(error),
-    onSubmit
+    sendCode,
+    onSubmit,
   }
 }

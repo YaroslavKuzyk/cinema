@@ -1,65 +1,82 @@
+<template>
+  <AuthLayout :title="$t('LOGIN')" :subtitle="$t('LOGIN_SUBTITLE')">
+    <AuthVariantSwitcher
+      :model-value="'login'"
+      :options="[
+        { value: 'login', label: $t('LOGIN') },
+        { value: 'register', label: $t('REGISTER') },
+      ]"
+      active-variant="primary"
+      @update:model-value="onAuthTypeChange"
+    />
+
+    <AuthVariantSwitcher
+      v-model="loginVariant"
+      :options="[
+        { value: 'phone', label: $t('PHONE_NUMBER') },
+        { value: 'email', label: $t('EMAIL') },
+      ]"
+    />
+
+    <PhoneLoginForm
+      v-if="loginVariant === 'phone'"
+      v-model:phone-number="form.values.phoneNumber"
+      v-model:code="form.values.code"
+      :code-sent="codeSent"
+      @submit="onSubmit"
+      @send-code="sendCode"
+    />
+
+    <EmailLoginForm
+      v-else
+      v-model:email="form.values.email"
+      v-model:password="form.values.password"
+    />
+
+    <AppButton
+      class="login-page__submit"
+      :loading="isLoading"
+      @click="onSubmit"
+    >
+      {{ $t("LOGIN") }}
+    </AppButton>
+
+    <template #footer>
+      <span>{{ $t("HAVE_NO_ACCOUNT") }}</span>
+      <NuxtLink :to="localePath('/auth/register')" class="app-link">
+        {{ $t("REGISTERATION") }}
+      </NuxtLink>
+    </template>
+  </AuthLayout>
+</template>
+
 <script setup lang="ts">
-import { Field, ErrorMessage } from 'vee-validate'
-import { useLoginForm } from '../composables'
+import {
+  AuthLayout,
+  AuthVariantSwitcher,
+  PhoneLoginForm,
+  EmailLoginForm,
+} from "../components";
+import { useLoginForm } from "../composables";
 
-const { t } = useI18n()
-const localePath = useLocalePath()
+const localePath = useLocalePath();
+const router = useRouter();
 
-const { form, isLoading, error, onSubmit } = useLoginForm()
+const { form, isLoading, codeSent, sendCode, onSubmit } = useLoginForm();
+
+const loginVariant = ref<"phone" | "email">("phone");
+
+const onAuthTypeChange = (value: string) => {
+  if (value === "register") {
+    router.push(localePath("/register"));
+  }
+};
 </script>
 
-<template>
-  <div class="page-center">
-    <div class="card container-sm">
-      <div class="card-header text-center stack stack-sm">
-        <h2 class="card-title text-2xl">{{ t('AUTH_LOGIN_TITLE') }}</h2>
-        <p class="card-description">{{ t('AUTH_ENTER_CREDENTIALS') }}</p>
-      </div>
-
-      <div class="card-content">
-        <div v-if="error" class="alert alert-destructive mb-md">{{ error }}</div>
-
-        <form @submit="onSubmit" class="stack stack-md">
-          <div class="form-group">
-            <label class="form-label">{{ t('AUTH_EMAIL') }}</label>
-            <Field
-              name="email"
-              type="email"
-              class="form-input"
-              :placeholder="t('AUTH_EMAIL_PLACEHOLDER')"
-            />
-            <ErrorMessage name="email" class="form-error" />
-          </div>
-
-          <div class="form-group">
-            <label class="form-label">{{ t('AUTH_PASSWORD') }}</label>
-            <Field
-              name="password"
-              type="password"
-              class="form-input"
-              :placeholder="t('AUTH_PASSWORD_PLACEHOLDER')"
-            />
-            <ErrorMessage name="password" class="form-error" />
-          </div>
-
-          <div class="text-right">
-            <NuxtLink :to="localePath('/forgot-password')" class="text-sm link-primary">
-              {{ t('AUTH_FORGOT_PASSWORD') }}
-            </NuxtLink>
-          </div>
-
-          <button type="submit" class="btn btn-primary btn-block" :disabled="isLoading">
-            {{ isLoading ? t('COMMON_LOADING') : t('NAV_LOGIN') }}
-          </button>
-        </form>
-
-        <p class="mt-md text-center text-sm text-muted">
-          {{ t('AUTH_NO_ACCOUNT') }}
-          <NuxtLink :to="localePath('/register')" class="link-primary">
-            {{ t('NAV_REGISTER') }}
-          </NuxtLink>
-        </p>
-      </div>
-    </div>
-  </div>
-</template>
+<style lang="scss" scoped>
+.login-page {
+  &__submit {
+    width: 100%;
+  }
+}
+</style>

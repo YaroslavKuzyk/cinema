@@ -1,3 +1,20 @@
 {
-  
+  "LOGIN": "Вхід",
+  "LOGIN_SUBTITLE": "Увійдіть у свій акаунт Cinema",
+  "REGISTER": "Реєстрація",
+  "PHONE_NUMBER": "Номер телефону",
+  "PHONE_NUMBER_PLACEHOLDER": "XX XXX XX XX",
+  "EMAIL": "Email",
+  "EMAIL_PLACEHOLDER": "example{'@'}email.com",
+  "PASSWORD": "Пароль",
+  "PASSWORD_PLACEHOLDER": "Введіть пароль",
+  "ENTER_SMS_CODE": "Введіть код з SMS",
+  "SEND_SMS_CODE": "Відправити код",
+  "SMS_CODE_SEND_ON": "Код відправлено на {phoneNumber}",
+  "SEND_AGAIN": "Надіслати повторно",
+  "HAVE_NO_ACCOUNT": "Немає акаунта?",
+  "REGISTERATION": "Зареєструватись",
+  "FORGOT_PASSWORD": "Забули пароль?",
+  "AUTH_SEND_CODE_FAILED": "Не вдалося відправити код",
+  "AUTH_LOGIN_FAILED": "Помилка входу"
 }

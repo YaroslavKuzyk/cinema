@@ -1,41 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:github.com)",
-      "WebFetch(domain:www.npmjs.com)",
-      "Bash(npx storybook@latest init:*)",
-      "Bash(npm run postinstall:*)",
-      "Bash(npm run lint:*)",
-      "Bash(npm run lint:css:*)",
-      "Bash(npm run lint:css:fix:*)",
-      "Bash(chmod:*)",
-      "Bash(git config:*)",
-      "Bash(gh auth:*)",
-      "Bash(security find-internet-password:*)",
-      "Bash(security find-generic-password:*)",
-      "Bash(ls:*)",
-      "Bash(git remote set-url:*)",
-      "Bash(ssh:*)",
-      "Bash(ssh-add:*)",
-      "Bash(npm uninstall:*)",
-      "Bash(git rm:*)",
-      "Bash(git add:*)",
-      "Bash(git commit:*)",
-      "Bash(git push:*)",
-      "Bash(npm run test:run:*)",
-      "Bash(npm run test:*)",
-      "Bash(npm test:*)",
-      "Bash(npm run:*)",
-      "Bash(npx vitest run:*)",
-      "Bash(claude setup-token:*)",
-      "Bash(pnpm run test:*)",
-      "Bash(yarn test:*)",
-      "Bash(bun test:*)",
-      "Bash(pnpm test:*)",
-      "Bash(npx vue-tsc:*)",
-      "Bash(export:*)",
-      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
-      "Bash(. \"$NVM_DIR/nvm.sh\")"
-    ]
-  }
+        "Bash",
+        "Read",
+        "Edit",
+        "Write",
+        "WebFetch",
+        "Grep",
+        "Glob",
+        "LS",
+        "MultiEdit",
+        "NotebookRead",
+        "NotebookEdit",
+        "TodoRead",
+        "TodoWrite",
+        "WebSearch"
+      ]
+    }
 }

@@ -4,6 +4,14 @@ export default {
   rules: {
     'order/properties-alphabetical-order': true,
     'selector-class-pattern': null,
+    'selector-id-pattern': null,
+    'selector-pseudo-class-no-unknown': [
+      true,
+      {
+        ignorePseudoClasses: ['deep', 'global', 'slotted'],
+      },
+    ],
+    'scss/comment-no-empty': null,
     'scss/at-rule-no-unknown': [
       true,
       {

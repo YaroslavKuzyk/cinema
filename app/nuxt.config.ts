@@ -17,13 +17,18 @@ export default defineNuxtConfig({
 
   modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxt/eslint'],
 
+  components: [
+    { path: '~/components/System', pathPrefix: false },
+    '~/components',
+  ],
+
   css: ['~/assets/styles/main.scss', 'vue-final-modal/style.css'],
 
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "~/assets/styles/_variables.scss" as *; @use "~/assets/styles/_mixins.scss" as *;',
+          additionalData: '@use "sass:math"; @use "~/assets/styles/_responsive.scss" as *;',
         },
       },
     },

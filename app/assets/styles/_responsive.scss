@@ -1,0 +1,146 @@
+@use "sass:math";
+
+// ==========================================================================
+// Responsive Design System
+// ==========================================================================
+// Fluid scaling between min viewport (768px) and max viewport (2560px)
+// Uses clamp() for smooth scaling across all screen sizes
+
+// Viewport breakpoints
+$viewport-min: 768px;
+$viewport-max: 2560px;
+
+// ==========================================================================
+// Fluid Size Function
+// ==========================================================================
+// Creates a fluid value that scales between min and max based on viewport
+// @param $min - minimum value (at 768px viewport)
+// @param $max - maximum value (at 2560px viewport)
+@function fluid($min, $max) {
+  $min-val: math.div($min, 1px);
+  $max-val: math.div($max, 1px);
+  $slope: math.div(($max-val - $min-val), (2560 - 768)) * 100;
+  $intersection: $min-val - math.div(($slope * 768), 100);
+
+  @return clamp(#{$min}, calc(#{$intersection}px + #{$slope}vw), #{$max});
+}
+
+// ==========================================================================
+// Fluid Spacing Scale
+// ==========================================================================
+$fluid-size-2xs: fluid(4px, 8px);
+$fluid-size-xs: fluid(8px, 16px);
+$fluid-size-sm: fluid(12px, 24px);
+$fluid-size-base: fluid(16px, 32px);
+$fluid-size-md: fluid(20px, 40px);
+$fluid-size-lg: fluid(24px, 48px);
+$fluid-size-xl: fluid(32px, 64px);
+$fluid-size-2xl: fluid(40px, 80px);
+$fluid-size-3xl: fluid(48px, 96px);
+$fluid-size-4xl: fluid(56px, 112px);
+$fluid-size-5xl: fluid(72px, 144px);
+
+// ==========================================================================
+// Fluid Border Radius Scale
+// ==========================================================================
+$fluid-radius-2xs: fluid(4px, 8px);
+$fluid-radius-xs: fluid(6px, 12px);
+$fluid-radius-sm: fluid(8px, 16px);
+$fluid-radius-md: fluid(10px, 20px);
+$fluid-radius-lg: fluid(12px, 24px);
+$fluid-radius-xl: fluid(14px, 28px);
+$fluid-radius-2xl: fluid(16px, 32px);
+$fluid-radius-3xl: fluid(20px, 40px);
+
+// ==========================================================================
+// Fluid Typography Scale
+// ==========================================================================
+@mixin FluidFontDisplay {
+  font-size: fluid(40px, 96px);
+  font-weight: 900;
+  letter-spacing: fluid(-1px, -3px);
+  line-height: 1.05;
+}
+
+@mixin FluidFontH1 {
+  font-size: fluid(32px, 72px);
+  font-weight: 900;
+  letter-spacing: fluid(-0.5px, -2px);
+  line-height: 1.1;
+}
+
+@mixin FluidFontH2 {
+  font-size: fluid(24px, 48px);
+  font-weight: 800;
+  letter-spacing: fluid(-0.25px, -1px);
+  line-height: 1.2;
+}
+
+@mixin FluidFontH3 {
+  font-size: fluid(20px, 36px);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+@mixin FluidFontBodyLg {
+  font-size: fluid(16px, 28px);
+  font-weight: 400;
+  letter-spacing: fluid(0.5px, 2px);
+  line-height: 1.6;
+}
+
+@mixin FluidFontBodyMd {
+  font-size: fluid(14px, 24px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@mixin FluidFontBodySm {
+  font-size: fluid(12px, 20px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@mixin FluidFontCaption {
+  font-size: fluid(11px, 18px);
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+@mixin FluidFontLabel {
+  font-size: fluid(12px, 20px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+// ==========================================================================
+// Fluid Shadows
+// ==========================================================================
+@mixin FluidShadowSm {
+  box-shadow: 0 fluid(2px, 6px) fluid(8px, 18px) 0 rgba(0, 0, 0, 0.3);
+}
+
+@mixin FluidShadowMd {
+  box-shadow: 0 fluid(4px, 12px) fluid(16px, 48px) 0 rgba(0, 0, 0, 0.5);
+}
+
+@mixin FluidShadowLg {
+  box-shadow: 0 fluid(10px, 30px) fluid(30px, 90px) 0 rgba(0, 0, 0, 0.7);
+}
+
+// ==========================================================================
+// Fluid Container Widths
+// ==========================================================================
+$fluid-container-xs: fluid(280px, 480px);
+$fluid-container-sm: fluid(360px, 640px);
+$fluid-container-md: fluid(480px, 800px);
+$fluid-container-lg: fluid(640px, 1024px);
+$fluid-container-xl: fluid(800px, 1280px);
+
+// ==========================================================================
+// Fluid Input/Button Heights
+// ==========================================================================
+$fluid-input-sm: fluid(32px, 48px);
+$fluid-input-md: fluid(40px, 60px);
+$fluid-input-lg: fluid(48px, 72px);
+

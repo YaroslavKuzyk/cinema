@@ -1,74 +1,128 @@
-// ==========================================================================
-// Colors - Base
-// ==========================================================================
-$primaryColor: #E50914;
-$primaryHoverColor: #B20710;
-$whiteColor: #FFFFFF;
-$infoColor: #3B82F6;
-$purpleColor: #A855F7;
-$successColor: #22C55E;
-$warningColor: #FBBF24;
-$dangerColor: #EF4444;
+@use "sass:math";
+@use "responsive" as *;
 
 // ==========================================================================
-// Colors - Background
+// CSS Custom Properties (Design System)
 // ==========================================================================
-$backgroundColor: #0A0A0A;
-$backgroundHoverColor: rgba($whiteColor, 0.04);
-$surfaceColor: #141414;
-$surfaceAltColor: #1A1A1A;
-$sidebarColor: #111111;
+:root {
+  // ============================================
+  // Spacing
+  // ============================================
+  --spacing-2xs: #{$fluid-size-2xs};
+  --spacing-xs: #{$fluid-size-xs};
+  --spacing-sm: #{$fluid-size-sm};
+  --spacing-base: #{$fluid-size-base};
+  --spacing-md: #{$fluid-size-md};
+  --spacing-lg: #{$fluid-size-lg};
+  --spacing-xl: #{$fluid-size-xl};
+  --spacing-2xl: #{$fluid-size-2xl};
+  --spacing-3xl: #{$fluid-size-3xl};
+  --spacing-4xl: #{$fluid-size-4xl};
+  --spacing-5xl: #{$fluid-size-5xl};
 
-// ==========================================================================
-// Colors - Background Variants (for badges, alerts, etc.)
-// ==========================================================================
-$primaryBgColor: rgba($primaryColor, 0.1);
-$primaryBgHoverColor: rgba($primaryColor, 0.2);
-$activeBgColor: rgba($primaryColor, 0.08);
-$successBgColor: rgba($successColor, 0.15);
-$warningBgColor: rgba($warningColor, 0.15);
-$dangerBgColor: rgba($dangerColor, 0.15);
-$infoBgColor: rgba($infoColor, 0.15);
-$purpleBgColor: rgba($purpleColor, 0.12);
+  // ============================================
+  // Border Radius
+  // ============================================
+  --radius-2xs: #{$fluid-radius-2xs};
+  --radius-xs: #{$fluid-radius-xs};
+  --radius-sm: #{$fluid-radius-sm};
+  --radius-md: #{$fluid-radius-md};
+  --radius-lg: #{$fluid-radius-lg};
+  --radius-xl: #{$fluid-radius-xl};
+  --radius-2xl: #{$fluid-radius-2xl};
+  --radius-3xl: #{$fluid-radius-3xl};
+  --radius-full: 9999px;
 
-// ==========================================================================
-// Colors - Text
-// ==========================================================================
-$textPrimaryColor: rgba($whiteColor, 0.8);
-$textSecondaryColor: rgba($whiteColor, 0.5);
-$textTertiaryColor: rgba($whiteColor, 0.35);
-$placeholderColor: #757575;
+  // ============================================
+  // Container Widths
+  // ============================================
+  --container-xs: #{$fluid-container-xs};
+  --container-sm: #{$fluid-container-sm};
+  --container-md: #{$fluid-container-md};
+  --container-lg: #{$fluid-container-lg};
+  --container-xl: #{$fluid-container-xl};
 
-// ==========================================================================
-// Colors - Border & Divider
-// ==========================================================================
-$borderColor: rgba($whiteColor, 0.08);
-$dividerColor: rgba($whiteColor, 0.06);
+  // ============================================
+  // Input Heights
+  // ============================================
+  --input-sm: #{$fluid-input-sm};
+  --input-md: #{$fluid-input-md};
+  --input-lg: #{$fluid-input-lg};
+  --input-field-height: #{fluid(46px, 82px)};
 
-// ==========================================================================
-// Spacing
-// ==========================================================================
-$size2Xs: 4px;
-$sizeBase: 8px;
-$sizeXs: 12px;
-$sizeSm: 16px;
-$sizeMd: 20px;
-$sizeLg: 24px;
-$sizeXl: 32px;
-$size2Xl: 40px;
-$size3Xl: 48px;
-$size4Xl: 56px;
-$size5Xl: 72px;
+  // ============================================
+  // Colors - Base
+  // ============================================
+  --color-primary: #E50914;
+  --color-primary-hover: #B20710;
+  --color-white: #FFFFFF;
+  --color-info: #3B82F6;
+  --color-purple: #A855F7;
+  --color-success: #22C55E;
+  --color-warning: #FBBF24;
+  --color-danger: #EF4444;
 
-// ==========================================================================
-// Border Radius
-// ==========================================================================
-$radius2Xs: 6px;
-$radiusXs: 8px;
-$radiusSm: 10px;
-$radiusMd: 12px;
-$radiusLg: 14px;
-$radiusXl: 16px;
-$radius2Xl: 20px;
-$radius3Xl: 24px;
-$radiusFull: 9999px;
+  // ============================================
+  // Colors - RGB (for rgba usage)
+  // ============================================
+  --color-primary-rgb: 229, 9, 20;
+  --color-white-rgb: 255, 255, 255;
+  --color-info-rgb: 59, 130, 246;
+  --color-purple-rgb: 168, 85, 247;
+  --color-success-rgb: 34, 197, 94;
+  --color-warning-rgb: 251, 191, 36;
+  --color-danger-rgb: 239, 68, 68;
+  --color-background-rgb: 10, 10, 10;
+
+  // ============================================
+  // Colors - Background
+  // ============================================
+  --color-background: #0A0A0A;
+  --color-background-hover: rgba(var(--color-white-rgb), 0.04);
+  --color-surface: #141414;
+  --color-surface-alt: #1A1A1A;
+  --color-sidebar: #111111;
+
+  // ============================================
+  // Colors - Background Variants
+  // ============================================
+  --color-primary-bg: rgba(var(--color-primary-rgb), 0.1);
+  --color-primary-bg-hover: rgba(var(--color-primary-rgb), 0.2);
+  --color-active-bg: rgba(var(--color-primary-rgb), 0.08);
+  --color-success-bg: rgba(var(--color-success-rgb), 0.15);
+  --color-warning-bg: rgba(var(--color-warning-rgb), 0.15);
+  --color-danger-bg: rgba(var(--color-danger-rgb), 0.15);
+  --color-info-bg: rgba(var(--color-info-rgb), 0.15);
+  --color-purple-bg: rgba(var(--color-purple-rgb), 0.12);
+
+  // ============================================
+  // Colors - Text
+  // ============================================
+  --color-text-primary: rgba(var(--color-white-rgb), 0.8);
+  --color-text-secondary: rgba(var(--color-white-rgb), 0.5);
+  --color-text-tertiary: rgba(var(--color-white-rgb), 0.35);
+  --color-placeholder: #757575;
+
+  // ============================================
+  // Colors - Border
+  // ============================================
+  --color-border: rgba(var(--color-white-rgb), 0.08);
+  --color-divider: rgba(var(--color-white-rgb), 0.06);
+
+  // ============================================
+  // Colors - Utility
+  // ============================================
+  --color-white-10: rgba(var(--color-white-rgb), 0.1);
+  --color-white-15: rgba(var(--color-white-rgb), 0.15);
+  --color-white-20: rgba(var(--color-white-rgb), 0.2);
+  --color-background-80: rgba(var(--color-background-rgb), 0.8);
+
+  // ============================================
+  // Colors - Variant Borders
+  // ============================================
+  --color-success-border: rgba(var(--color-success-rgb), 0.2);
+  --color-info-border: rgba(var(--color-info-rgb), 0.2);
+  --color-warning-border: rgba(var(--color-warning-rgb), 0.2);
+  --color-danger-border: rgba(var(--color-danger-rgb), 0.2);
+  --color-purple-border: rgba(var(--color-purple-rgb), 0.2);
+}

@@ -1,4 +1,4 @@
-import type { IToast, ToastVariant } from "~/components/AppToast/index.types";
+import type { IToast, ToastVariant } from "~/components/System/AppToast/index.types";
 
 const toasts = ref<IToast[]>([]);
 
