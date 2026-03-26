@@ -121,6 +121,7 @@
   // ============================================
   // Colors - Variant Borders
   // ============================================
+  --color-primary-border: rgba(var(--color-primary-rgb), 0.2);
   --color-success-border: rgba(var(--color-success-rgb), 0.2);
   --color-info-border: rgba(var(--color-info-rgb), 0.2);
   --color-warning-border: rgba(var(--color-warning-rgb), 0.2);
@@ -130,7 +131,7 @@
   // ============================================
   // Large screens — fluid scaling (2550px → 2560px)
   // ============================================
-  @media (min-width: 2550px) {
+  @media (width >= 2550px) {
     --spacing-3xs: #{fluid(2px, 4px)};
     --spacing-2xs: #{fluid(4px, 8px)};
     --spacing-xs: #{fluid(8px, 16px)};
@@ -143,7 +144,6 @@
     --spacing-3xl: #{fluid(48px, 96px)};
     --spacing-4xl: #{fluid(56px, 112px)};
     --spacing-5xl: #{fluid(72px, 144px)};
-
     --radius-2xs: #{fluid(4px, 8px)};
     --radius-xs: #{fluid(6px, 12px)};
     --radius-sm: #{fluid(8px, 16px)};
@@ -152,13 +152,11 @@
     --radius-xl: #{fluid(14px, 28px)};
     --radius-2xl: #{fluid(16px, 32px)};
     --radius-3xl: #{fluid(20px, 40px)};
-
     --container-xs: #{fluid(280px, 480px)};
     --container-sm: #{fluid(360px, 640px)};
     --container-md: #{fluid(460px, 800px)};
     --container-lg: #{fluid(640px, 1024px)};
     --container-xl: #{fluid(800px, 1280px)};
-
     --input-sm: #{fluid(32px, 48px)};
     --input-md: #{fluid(40px, 60px)};
     --input-lg: #{fluid(48px, 72px)};

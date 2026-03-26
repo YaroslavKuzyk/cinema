@@ -13,9 +13,9 @@
     :href="props.as === 'a' ? props.href : undefined"
   >
     <span class="app-button__content">
-      <component v-if="props.iconLeft" :is="props.iconLeft" :size="getIconSize" />
+      <component :is="props.iconLeft" v-if="props.iconLeft" :size="getIconSize" />
       <slot />
-      <component v-if="props.iconRight" :is="props.iconRight" :size="getIconSize" />
+      <component :is="props.iconRight" v-if="props.iconRight" :size="getIconSize" />
     </span>
 
     <div v-if="props.loading" class="app-button__loader">
@@ -151,6 +151,12 @@ const getLoaderSize = computed(() => {
     background: var(--color-success-bg);
     border-color: var(--color-success-border);
     color: var(--color-success);
+  }
+
+  &--error {
+    background: var(--color-primary-bg);
+    border-color: var(--color-primary-border);
+    color: var(--color-primary);
   }
 
   &--info {

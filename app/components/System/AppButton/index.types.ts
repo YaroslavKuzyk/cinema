@@ -6,6 +6,7 @@ export interface IProps {
     | "primary"
     | "secondary"
     | "danger"
+    | "error"
     | "success"
     | "info"
     | "purple"
