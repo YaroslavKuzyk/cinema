@@ -33,7 +33,7 @@ export function useRegisterForm() {
       const { confirmPassword, termsAccepted, ...payload } = values
       const response = await authApi.register(payload)
       authStore.setAuth(response.accessToken, response.user)
-      router.push(localePath('/dashboard'))
+      router.push(localePath({ name: 'dashboard' }))
     } catch (e: unknown) {
       const err = e as { data?: { message?: string }; message?: string }
       error.value = err.data?.message || err.message || t('AUTH_REGISTER_FAILED')

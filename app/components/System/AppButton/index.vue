@@ -13,7 +13,9 @@
     :href="props.as === 'a' ? props.href : undefined"
   >
     <span class="app-button__content">
+      <component v-if="props.iconLeft" :is="props.iconLeft" :size="getIconSize" />
       <slot />
+      <component v-if="props.iconRight" :is="props.iconRight" :size="getIconSize" />
     </span>
 
     <div v-if="props.loading" class="app-button__loader">
@@ -40,6 +42,17 @@ const componentTag = computed(() => {
   if (props.as === "nuxt-link") return resolveComponent("NuxtLink");
   if (props.as === "a") return "a";
   return "button";
+});
+
+const getIconSize = computed(() => {
+  switch (props.size) {
+    case "small":
+      return 14;
+    case "large":
+      return 20;
+    default:
+      return 16;
+  }
 });
 
 const getLoaderSize = computed(() => {

@@ -32,7 +32,7 @@
 
     <template #footer>
       <span>{{ $t("HAVE_ACCOUNT") }}</span>
-      <NuxtLink :to="localePath('/login')" class="app-link">
+      <NuxtLink :to="localePath({ name: routes.login })" class="app-link">
         {{ $t("LOGIN") }}
       </NuxtLink>
     </template>
@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { AuthLayout, AuthVariantSwitcher, RegisterForm } from "../components";
 import { useRegisterForm } from "../composables";
+import { routes } from ".";
 
 const localePath = useLocalePath();
 const router = useRouter();
@@ -50,7 +51,7 @@ const { form, isLoading, onSubmit } = useRegisterForm();
 
 const onAuthTypeChange = (value: string) => {
   if (value === "login") {
-    router.push(localePath("/login"));
+    router.push(localePath({ name: routes.login }));
   }
 };
 </script>

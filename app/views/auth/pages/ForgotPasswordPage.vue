@@ -33,7 +33,7 @@
 
         <AppButton
           as="nuxt-link"
-          :to="localePath('/login?method=email')"
+          :to="localePath({ name: routes.login, query: { method: 'email' } })"
           variant="secondary"
           size="small"
           class="forgot-password-page__back"
@@ -47,7 +47,7 @@
     <AppButton
       v-else
       as="nuxt-link"
-      :to="localePath('/login?method=email')"
+      :to="localePath({ name: routes.login, query: { method: 'email' } })"
       variant="secondary"
       size="small"
       class="forgot-password-page__back"
@@ -62,6 +62,7 @@
 import { LockKeyhole, ArrowLeft } from "lucide-vue-next";
 import { AuthLayout, ForgotPasswordForm } from "../components";
 import { useForgotPasswordForm } from "../composables";
+import { routes } from ".";
 
 const localePath = useLocalePath();
 

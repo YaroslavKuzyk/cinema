@@ -1,4 +1,5 @@
 import type { $Fetch } from 'ofetch'
+import { routes as authRoutes } from '~/views/auth/pages'
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
@@ -34,7 +35,7 @@ export default defineNuxtPlugin(() => {
         if (!refreshed) {
           authStore.logout()
           const localePath = useLocalePath()
-          navigateTo(localePath('/login'))
+          navigateTo(localePath({ name: authRoutes.login }))
         }
       }
     }

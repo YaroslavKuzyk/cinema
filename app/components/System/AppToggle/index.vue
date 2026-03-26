@@ -7,6 +7,7 @@
         { 'app-toggle__button--disabled': disabled },
       ]"
       :disabled="disabled"
+      @click="isActive = !isActive"
     />
     <span v-if="label" class="app-toggle__label">{{ label }}</span>
   </div>
@@ -32,6 +33,8 @@ const isActive = useModel(props, "modelValue");
   outline: 3px solid transparent;
 
   &__button {
+    --toggle-padding: calc((var(--spacing-lg) - var(--spacing-md)) / 2 + 1px);
+
     background: var(--color-white-15);
     border: none;
     border-radius: var(--radius-lg);
@@ -45,11 +48,11 @@ const isActive = useModel(props, "modelValue");
       border-radius: var(--radius-full);
       content: "";
       height: var(--spacing-md);
-      left: fluid(3px, 6px);
+      left: var(--toggle-padding);
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
-      transition: left 0.3s ease;
+      transform: translateY(-50%) translateX(0);
+      transition: transform 0.3s ease;
       width: var(--spacing-md);
     }
 
@@ -63,8 +66,7 @@ const isActive = useModel(props, "modelValue");
     background: var(--color-success);
 
     &::before {
-      left: auto;
-      right: fluid(3px, 6px);
+      transform: translateY(-50%) translateX(calc(var(--spacing-2xl) - var(--spacing-md) - 2 * var(--toggle-padding)));
     }
   }
 

@@ -8,6 +8,7 @@
   // ============================================
   // Spacing — compact defaults (< 2550px)
   // ============================================
+  --spacing-3xs: 3px;
   --spacing-2xs: 5px;
   --spacing-xs: 9px;
   --spacing-sm: 13px;
@@ -130,6 +131,7 @@
   // Large screens — fluid scaling (2550px → 2560px)
   // ============================================
   @media (min-width: 2550px) {
+    --spacing-3xs: #{fluid(2px, 4px)};
     --spacing-2xs: #{fluid(4px, 8px)};
     --spacing-xs: #{fluid(8px, 16px)};
     --spacing-sm: #{fluid(12px, 24px)};

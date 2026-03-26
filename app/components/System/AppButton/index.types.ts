@@ -1,4 +1,5 @@
 import type { RouteLocationRaw } from "vue-router";
+import type { Component } from "vue";
 
 export interface IProps {
   variant?:
@@ -16,4 +17,6 @@ export interface IProps {
   as?: "button" | "a" | "nuxt-link";
   to?: RouteLocationRaw;
   href?: string;
+  iconLeft?: Component;
+  iconRight?: Component;
 }

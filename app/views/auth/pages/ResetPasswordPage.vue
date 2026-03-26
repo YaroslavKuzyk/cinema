@@ -45,7 +45,7 @@
     <AppButton
       v-if="isSuccess"
       as="nuxt-link"
-      :to="localePath('/login')"
+      :to="localePath({ name: routes.login })"
       class="reset-password-page__submit"
     >
       {{ $t("GO_TO_LOGIN") }}
@@ -57,6 +57,7 @@
 import { LockKeyhole } from "lucide-vue-next";
 import { AuthLayout, ResetPasswordForm } from "../components";
 import { useResetPasswordForm } from "../composables";
+import { routes } from ".";
 
 const localePath = useLocalePath();
 const route = useRoute();

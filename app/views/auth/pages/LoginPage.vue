@@ -45,7 +45,7 @@
 
     <template #footer>
       <span>{{ $t("HAVE_NO_ACCOUNT") }}</span>
-      <NuxtLink :to="localePath('/register')" class="app-link">
+      <NuxtLink :to="localePath({ name: routes.register })" class="app-link">
         {{ $t("REGISTERATION") }}
       </NuxtLink>
     </template>
@@ -60,6 +60,7 @@ import {
   EmailLoginForm,
 } from "../components";
 import { useLoginForm } from "../composables";
+import { routes } from ".";
 
 const localePath = useLocalePath();
 const router = useRouter();
@@ -77,7 +78,7 @@ watch(loginVariant, (value) => {
 
 const onAuthTypeChange = (value: string) => {
   if (value === "register") {
-    router.push(localePath("/register"));
+    router.push(localePath({ name: routes.register }));
   }
 };
 </script>

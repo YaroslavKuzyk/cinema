@@ -50,7 +50,7 @@ export function useLoginForm() {
     try {
       const response = await authApi.login(values)
       authStore.setAuth(response.accessToken, response.user)
-      router.push(localePath('/dashboard'))
+      router.push(localePath({ name: 'dashboard' }))
     } catch (e: unknown) {
       const err = e as { data?: { message?: string }; message?: string }
       error.value = err.data?.message || err.message || t('AUTH_LOGIN_FAILED')

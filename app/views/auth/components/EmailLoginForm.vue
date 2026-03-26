@@ -19,7 +19,7 @@
     </AuthFormField>
 
     <div class="email-login-form__actions">
-      <NuxtLink :to="localePath('/forgot-password')" class="app-link">
+      <NuxtLink :to="localePath({ name: routes.forgotPassword })" class="app-link">
         {{ $t("FORGOT_PASSWORD") }}
       </NuxtLink>
     </div>
@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import AuthFormField from "./AuthFormField.vue";
+import { routes } from "../pages";
 
 const localePath = useLocalePath();
 
