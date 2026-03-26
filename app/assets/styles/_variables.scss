@@ -6,49 +6,49 @@
 // ==========================================================================
 :root {
   // ============================================
-  // Spacing
+  // Spacing — compact defaults (< 2550px)
   // ============================================
-  --spacing-2xs: #{$fluid-size-2xs};
-  --spacing-xs: #{$fluid-size-xs};
-  --spacing-sm: #{$fluid-size-sm};
-  --spacing-base: #{$fluid-size-base};
-  --spacing-md: #{$fluid-size-md};
-  --spacing-lg: #{$fluid-size-lg};
-  --spacing-xl: #{$fluid-size-xl};
-  --spacing-2xl: #{$fluid-size-2xl};
-  --spacing-3xl: #{$fluid-size-3xl};
-  --spacing-4xl: #{$fluid-size-4xl};
-  --spacing-5xl: #{$fluid-size-5xl};
+  --spacing-2xs: 5px;
+  --spacing-xs: 9px;
+  --spacing-sm: 13px;
+  --spacing-base: 18px;
+  --spacing-md: 22px;
+  --spacing-lg: 26px;
+  --spacing-xl: 35px;
+  --spacing-2xl: 44px;
+  --spacing-3xl: 53px;
+  --spacing-4xl: 62px;
+  --spacing-5xl: 79px;
 
   // ============================================
-  // Border Radius
+  // Border Radius — compact defaults
   // ============================================
-  --radius-2xs: #{$fluid-radius-2xs};
-  --radius-xs: #{$fluid-radius-xs};
-  --radius-sm: #{$fluid-radius-sm};
-  --radius-md: #{$fluid-radius-md};
-  --radius-lg: #{$fluid-radius-lg};
-  --radius-xl: #{$fluid-radius-xl};
-  --radius-2xl: #{$fluid-radius-2xl};
-  --radius-3xl: #{$fluid-radius-3xl};
+  --radius-2xs: 5px;
+  --radius-xs: 7px;
+  --radius-sm: 9px;
+  --radius-md: 11px;
+  --radius-lg: 13px;
+  --radius-xl: 15px;
+  --radius-2xl: 18px;
+  --radius-3xl: 22px;
   --radius-full: 9999px;
 
   // ============================================
-  // Container Widths
+  // Container Widths — compact defaults
   // ============================================
-  --container-xs: #{$fluid-container-xs};
-  --container-sm: #{$fluid-container-sm};
-  --container-md: #{$fluid-container-md};
-  --container-lg: #{$fluid-container-lg};
-  --container-xl: #{$fluid-container-xl};
+  --container-xs: 308px;
+  --container-sm: 396px;
+  --container-md: 506px;
+  --container-lg: 704px;
+  --container-xl: 880px;
 
   // ============================================
-  // Input Heights
+  // Input Heights — compact defaults
   // ============================================
-  --input-sm: #{$fluid-input-sm};
-  --input-md: #{$fluid-input-md};
-  --input-lg: #{$fluid-input-lg};
-  --input-field-height: #{fluid(46px, 82px)};
+  --input-sm: 35px;
+  --input-md: 44px;
+  --input-lg: 53px;
+  --input-field-height: 51px;
 
   // ============================================
   // Colors - Base
@@ -125,4 +125,41 @@
   --color-warning-border: rgba(var(--color-warning-rgb), 0.2);
   --color-danger-border: rgba(var(--color-danger-rgb), 0.2);
   --color-purple-border: rgba(var(--color-purple-rgb), 0.2);
+
+  // ============================================
+  // Large screens — fluid scaling (2550px → 2560px)
+  // ============================================
+  @media (min-width: 2550px) {
+    --spacing-2xs: #{fluid(4px, 8px)};
+    --spacing-xs: #{fluid(8px, 16px)};
+    --spacing-sm: #{fluid(12px, 24px)};
+    --spacing-base: #{fluid(16px, 32px)};
+    --spacing-md: #{fluid(20px, 40px)};
+    --spacing-lg: #{fluid(24px, 48px)};
+    --spacing-xl: #{fluid(32px, 64px)};
+    --spacing-2xl: #{fluid(40px, 80px)};
+    --spacing-3xl: #{fluid(48px, 96px)};
+    --spacing-4xl: #{fluid(56px, 112px)};
+    --spacing-5xl: #{fluid(72px, 144px)};
+
+    --radius-2xs: #{fluid(4px, 8px)};
+    --radius-xs: #{fluid(6px, 12px)};
+    --radius-sm: #{fluid(8px, 16px)};
+    --radius-md: #{fluid(10px, 20px)};
+    --radius-lg: #{fluid(12px, 24px)};
+    --radius-xl: #{fluid(14px, 28px)};
+    --radius-2xl: #{fluid(16px, 32px)};
+    --radius-3xl: #{fluid(20px, 40px)};
+
+    --container-xs: #{fluid(280px, 480px)};
+    --container-sm: #{fluid(360px, 640px)};
+    --container-md: #{fluid(460px, 800px)};
+    --container-lg: #{fluid(640px, 1024px)};
+    --container-xl: #{fluid(800px, 1280px)};
+
+    --input-sm: #{fluid(32px, 48px)};
+    --input-md: #{fluid(40px, 60px)};
+    --input-lg: #{fluid(48px, 72px)};
+    --input-field-height: #{fluid(46px, 82px)};
+  }
 }
