@@ -138,7 +138,6 @@ export function useAdminAccount() {
     { title: t('ADMIN_ACCOUNT_TAB_SECURITY'), value: 'security' },
     { title: t('ADMIN_ACCOUNT_TAB_NOTIFICATIONS'), value: 'notifications' },
     { title: t('ADMIN_ACCOUNT_TAB_SESSIONS'), value: 'sessions' },
-    { title: t('ADMIN_ACCOUNT_TAB_ACTIVITY'), value: 'activity' },
   ])
 
   // Actions
