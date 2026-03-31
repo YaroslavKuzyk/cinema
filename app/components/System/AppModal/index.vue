@@ -75,6 +75,7 @@ const isOpen = computed({
     display: flex;
     justify-content: center;
     padding: var(--spacing-lg);
+    width: 100%;
   }
 
   &__content {
@@ -97,6 +98,14 @@ const isOpen = computed({
 
     &--large {
       max-width: var(--container-md);
+    }
+
+    &--xlarge {
+      max-width: var(--container-xl);
+    }
+
+    &--full {
+      max-width: 1100px;
     }
   }
 

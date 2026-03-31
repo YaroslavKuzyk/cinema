@@ -3,7 +3,7 @@
     <button
       class="app-checkbox__button"
       :class="[
-        { 'app-checkbox__button--active': isActive },
+        isActive && `app-checkbox__button--${props.variant}`,
         { 'app-checkbox__button--disabled': disabled },
       ]"
       :disabled="disabled"
@@ -24,6 +24,7 @@ import { Check } from "lucide-vue-next";
 const props = withDefaults(defineProps<IProps>(), {
   label: "",
   disabled: false,
+  variant: "primary",
 });
 
 const isActive = useModel(props, "modelValue");
@@ -31,7 +32,7 @@ const isActive = useModel(props, "modelValue");
 
 <style lang="scss" scoped>
 .app-checkbox {
-  align-items: flex-start;
+  align-items: center;
   border: none;
   display: flex;
   gap: var(--spacing-sm);
@@ -47,7 +48,6 @@ const isActive = useModel(props, "modelValue");
     flex-shrink: 0;
     height: var(--spacing-lg);
     justify-content: center;
-    margin-top: fluid(2px, 4px);
     transition: background-color 0.3s ease;
     width: var(--spacing-lg);
 
@@ -57,9 +57,34 @@ const isActive = useModel(props, "modelValue");
     }
   }
 
-  &__button--active {
+  &__button--primary {
     background: var(--color-primary);
     border-color: var(--color-primary);
+  }
+
+  &__button--success {
+    background: var(--color-success);
+    border-color: var(--color-success);
+  }
+
+  &__button--danger {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+  }
+
+  &__button--warning {
+    background: var(--color-warning);
+    border-color: var(--color-warning);
+  }
+
+  &__button--info {
+    background: var(--color-info);
+    border-color: var(--color-info);
+  }
+
+  &__button--purple {
+    background: var(--color-purple);
+    border-color: var(--color-purple);
   }
 
   &__button--disabled {

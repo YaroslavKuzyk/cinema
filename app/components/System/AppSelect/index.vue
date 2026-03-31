@@ -1,11 +1,12 @@
 <template>
-  <div class="app-select" :class="{ 'app-select--disabled': props.disabled }">
+  <div ref="selectRef" class="app-select" :class="{ 'app-select--disabled': props.disabled }">
     <label v-if="props.label" :for="selectId" class="app-select__label">
       {{ props.label }}
     </label>
     <div class="app-select__wrapper">
       <button
         :id="selectId"
+        ref="triggerRef"
         type="button"
         class="app-select__trigger"
         :class="{ 'app-select__trigger--open': isOpen }"
@@ -21,37 +22,44 @@
           :size="16"
         />
       </button>
-      <Transition name="dropdown">
-        <div v-if="isOpen" class="app-select__dropdown">
-          <button
-            v-for="(option, index) in props.options"
-            :key="getOptionKey(option, index)"
-            type="button"
-            class="app-select__option"
-            :class="{ 'app-select__option--selected': isSelected(option) }"
-            @click="selectOption(option)"
+      <Teleport to="body">
+        <Transition name="dropdown">
+          <div
+            v-if="isOpen"
+            ref="dropdownRef"
+            class="app-select__dropdown"
+            :style="dropdownStyle"
           >
-            <span v-if="props.multiple" class="app-select__checkbox">
-              <svg
-                v-if="isSelected(option)"
-                width="12"
-                height="12"
-                viewBox="0 0 12 12"
-                fill="none"
-              >
-                <path
-                  d="M2 6L5 9L10 3"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-            {{ getOptionTitle(option) }}
-          </button>
-        </div>
-      </Transition>
+            <button
+              v-for="(option, index) in props.options"
+              :key="getOptionKey(option, index)"
+              type="button"
+              class="app-select__option"
+              :class="{ 'app-select__option--selected': isSelected(option) }"
+              @click="selectOption(option)"
+            >
+              <span v-if="props.multiple" class="app-select__checkbox">
+                <svg
+                  v-if="isSelected(option)"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                >
+                  <path
+                    d="M2 6L5 9L10 3"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+              {{ getOptionTitle(option) }}
+            </button>
+          </div>
+        </Transition>
+      </Teleport>
     </div>
   </div>
 </template>
@@ -75,6 +83,10 @@ const emit = defineEmits<IEmits>();
 
 const selectId = useId();
 const isOpen = ref(false);
+const selectRef = ref<HTMLElement | null>(null);
+const triggerRef = ref<HTMLElement | null>(null);
+const dropdownRef = ref<HTMLElement | null>(null);
+const dropdownStyle = ref<Record<string, string>>({});
 
 const isPrimitive = (value: unknown): value is string | number => {
   return typeof value === "string" || typeof value === "number";
@@ -154,9 +166,24 @@ const isSelected = (option: IOption): boolean => {
   return compareValues(props.modelValue as IValue, optionValue);
 };
 
+const updateDropdownPosition = () => {
+  if (!triggerRef.value) return;
+  const rect = triggerRef.value.getBoundingClientRect();
+  dropdownStyle.value = {
+    position: "fixed",
+    top: `${rect.bottom + 4}px`,
+    left: `${rect.left}px`,
+    width: `${rect.width}px`,
+    zIndex: "9999",
+  };
+};
+
 const toggle = () => {
   if (!props.disabled) {
     isOpen.value = !isOpen.value;
+    if (isOpen.value) {
+      nextTick(updateDropdownPosition);
+    }
   }
 };
 
@@ -182,7 +209,10 @@ const selectOption = (option: IOption) => {
 
 const handleClickOutside = (event: MouseEvent) => {
   const target = event.target as HTMLElement;
-  if (!target.closest(".app-select")) {
+  if (
+    selectRef.value && !selectRef.value.contains(target) &&
+    dropdownRef.value && !dropdownRef.value.contains(target)
+  ) {
     isOpen.value = false;
   }
 };
@@ -258,54 +288,52 @@ onUnmounted(() => {
       transform: rotate(180deg);
     }
   }
+}
+</style>
 
-  &__dropdown {
-    background-color: var(--color-divider);
-    border: 2px solid var(--color-border);
-    border-radius: var(--radius-md);
-    display: flex;
-    flex-direction: column;
-    left: 0;
-    margin-top: var(--spacing-2xs);
-    max-height: fluid(180px, 300px);
-    overflow-y: auto;
-    position: absolute;
-    right: 0;
-    z-index: 10;
+<style lang="scss">
+.app-select__dropdown {
+  @include FluidShadowMd;
+  background-color: var(--color-surface-alt);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  max-height: fluid(180px, 300px);
+  overflow-y: auto;
+}
+
+.app-select__option {
+  @include FluidFontBodySm;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  display: flex;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-base);
+  text-align: left;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: var(--color-white-10);
   }
 
-  &__option {
-    @include FluidFontBodySm;
-    align-items: center;
-    background: none;
-    border: none;
-    color: var(--color-text-primary);
-    cursor: pointer;
-    display: flex;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-xs) var(--spacing-base);
-    text-align: left;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: var(--color-border);
-    }
-
-    &--selected {
-      background-color: var(--color-primary-bg-hover);
-      color: var(--color-white);
-    }
+  &--selected {
+    background-color: var(--color-primary-bg-hover);
+    color: var(--color-white);
   }
+}
 
-  &__checkbox {
-    align-items: center;
-    border: 2px solid currentcolor;
-    border-radius: var(--radius-2xs);
-    display: flex;
-    height: var(--spacing-base);
-    justify-content: center;
-    width: var(--spacing-base);
-  }
+.app-select__checkbox {
+  align-items: center;
+  border: 2px solid currentcolor;
+  border-radius: var(--radius-2xs);
+  display: flex;
+  height: var(--spacing-base);
+  justify-content: center;
+  width: var(--spacing-base);
 }
 
 .dropdown-enter-active,
