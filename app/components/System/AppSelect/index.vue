@@ -182,6 +182,7 @@ const toggle = () => {
   if (!props.disabled) {
     isOpen.value = !isOpen.value;
     if (isOpen.value) {
+      updateDropdownPosition();
       nextTick(updateDropdownPosition);
     }
   }

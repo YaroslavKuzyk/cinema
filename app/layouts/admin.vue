@@ -29,6 +29,7 @@ const handleLogout = () => {
   &__sidebar {
     background-color: var(--color-sidebar);
     border-right: 1px solid var(--color-border);
+    flex-shrink: 0;
     height: 100vh;
     position: sticky;
     top: 0;
@@ -37,6 +38,7 @@ const handleLogout = () => {
 
   &__content {
     flex: 1;
+    min-width: 0;
     padding: var(--spacing-xl);
   }
 }
