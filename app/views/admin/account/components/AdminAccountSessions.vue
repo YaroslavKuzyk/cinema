@@ -94,7 +94,9 @@ const formatLastActive = (lastActive: string) => {
 
     span {
       @include FluidFontBodySm;
+
       color: var(--color-text-tertiary);
+
     }
   }
 

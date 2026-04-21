@@ -7,8 +7,9 @@
     <AdminAdministratorsStats :stats="stats" />
 
     <AdminAdministratorsFilters
-      v-model="filters"
+      :model-value="filters"
       :total-found="filteredAdmins.length"
+      @update:model-value="Object.assign(filters, $event)"
     />
 
     <div class="admin-administrators-page__grid">

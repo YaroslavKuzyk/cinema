@@ -1,11 +1,5 @@
-<template>
-  <div>
-    <h1>Dashboard</h1>
-  </div>
-</template>
-
+<template><AdminDashboardPage /></template>
 <script setup lang="ts">
-definePageMeta({
-  layout: "admin",
-});
+import { AdminDashboardPage } from '~/views/admin/dashboard'
+definePageMeta({ layout: 'admin' })
 </script>

@@ -1,9 +1,16 @@
+export type SortDirection = 'asc' | 'desc' | null;
+
 export interface IColumn {
   key: string;
   label: string;
   width?: string;
   align?: 'left' | 'center' | 'right';
   sortable?: boolean;
+}
+
+export interface ISortState {
+  key: string;
+  direction: SortDirection;
 }
 
 export interface IProps {
@@ -14,6 +21,7 @@ export interface IProps {
   rowKey?: string;
   loading?: boolean;
   emptyText?: string;
+  sortBy?: ISortState | null;
 }
 
 export interface IPaginationProps {

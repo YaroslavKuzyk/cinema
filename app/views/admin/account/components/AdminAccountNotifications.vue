@@ -129,7 +129,9 @@ const updateField = <K extends keyof IAdminAccountNotifications>(
 
     span {
       @include FluidFontBodySm;
+
       color: var(--color-text-tertiary);
+
     }
   }
 

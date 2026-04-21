@@ -20,4 +20,5 @@ export interface IProps {
   href?: string;
   iconLeft?: Component;
   iconRight?: Component;
+  square?: boolean;
 }

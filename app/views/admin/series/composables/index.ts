@@ -1,0 +1,1 @@
+export { useAdminSeries } from './useAdminSeries'

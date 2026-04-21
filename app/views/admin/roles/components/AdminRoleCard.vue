@@ -142,13 +142,17 @@ const roleIcon = computed(() => {
 
     h3 {
       @include FluidFontH3;
+
       color: var(--color-white);
+
     }
   }
 
   &__title p {
     @include FluidFontBodySm;
+
     color: var(--color-text-secondary);
+
   }
 
   &__actions {
@@ -158,8 +162,11 @@ const roleIcon = computed(() => {
   }
 
   &__admins {
+
     display: flex;
+
     margin-right: calc(-1 * var(--spacing-xs));
+
   }
 
   &__admin-avatar {
@@ -183,8 +190,11 @@ const roleIcon = computed(() => {
   }
 
   &__buttons {
+
     display: flex;
+
     gap: var(--spacing-xs);
+
   }
 
   &__btn {
@@ -202,13 +212,19 @@ const roleIcon = computed(() => {
     width: fluid(32px, 40px);
 
     &:hover {
+
       color: var(--color-white);
+
       outline: 3px solid var(--color-white);
+
     }
 
     &--danger:hover {
+
       color: var(--color-primary);
+
       outline-color: var(--color-primary);
+
     }
   }
 }

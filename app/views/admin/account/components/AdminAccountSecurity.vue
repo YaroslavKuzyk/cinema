@@ -97,8 +97,11 @@ const updateField = <K extends keyof IAdminAccountSecurity>(
   gap: var(--spacing-md);
 
   &__row {
+
     display: flex;
+
     gap: var(--spacing-md);
+
   }
 
   &__toggle-row {
@@ -121,7 +124,9 @@ const updateField = <K extends keyof IAdminAccountSecurity>(
 
     span {
       @include FluidFontBodySm;
+
       color: var(--color-text-tertiary);
+
     }
   }
 

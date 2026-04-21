@@ -15,6 +15,7 @@
           :options="roleOptions"
           item-title="title"
           item-value="value"
+          :prefix="$t('ADMIN_ADMINS_FILTER_ROLE')"
           :placeholder="$t('ADMIN_ADMINS_FILTER_ROLE')"
           @update:model-value="updateFilter('role', $event)"
         />
@@ -25,6 +26,7 @@
           :options="statusOptions"
           item-title="title"
           item-value="value"
+          :prefix="$t('ADMIN_ADMINS_FILTER_STATUS')"
           :placeholder="$t('ADMIN_ADMINS_FILTER_STATUS')"
           @update:model-value="updateFilter('status', $event)"
         />
@@ -87,8 +89,11 @@ const updateFilter = (key: keyof IAdminFilters, value: string) => {
   }
 
   &__search {
+
     position: relative;
+
     width: fluid(250px, 400px);
+
   }
 
   &__search-icon {

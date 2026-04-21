@@ -1,0 +1,5 @@
+export { default as AdminAnimeHeader } from './AdminAnimeHeader.vue'
+export { default as AdminAnimeStats } from './AdminAnimeStats.vue'
+export { default as AdminAnimeFilters } from './AdminAnimeFilters.vue'
+export { default as AdminAnimeBulkActions } from './AdminAnimeBulkActions.vue'
+export { default as AdminAnimeTable } from './AdminAnimeTable.vue'

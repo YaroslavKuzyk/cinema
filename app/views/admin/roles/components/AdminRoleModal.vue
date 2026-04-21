@@ -33,20 +33,13 @@
           :rows="3"
         />
 
-        <div class="admin-role-modal__color">
-          <span class="admin-role-modal__label">{{ $t('ADMIN_ROLES_MODAL_COLOR') }}</span>
-          <div class="admin-role-modal__colors">
-            <button
-              v-for="color in colorOptions"
-              :key="color"
-              class="admin-role-modal__color-btn"
-              :class="{ 'admin-role-modal__color-btn--active': form.color === color }"
-              :style="{ background: color }"
-              :disabled="isViewMode"
-              @click="form.color = color"
-            />
-          </div>
-        </div>
+        <AppColorPicker
+          :model-value="form.color"
+          :colors="colorOptions"
+          :label="$t('ADMIN_ROLES_MODAL_COLOR')"
+          :disabled="isViewMode"
+          @update:model-value="form.color = $event"
+        />
       </div>
 
       <div class="admin-role-modal__divider" />
@@ -312,47 +305,12 @@ const handleClosed = () => {
     }
   }
 
-  &__color {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xs);
-  }
-
-  &__label {
-    @include FluidFontLabel;
-    color: var(--color-text-secondary);
-  }
-
-  &__colors {
-    display: flex;
-    gap: var(--spacing-xs);
-  }
-
-  &__color-btn {
-    border: 2px solid transparent;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    height: fluid(32px, 40px);
-    outline: 3px solid transparent;
-    transition: all 0.3s ease;
-    width: fluid(32px, 40px);
-
-    &:hover:not(:disabled) {
-      outline: 3px solid var(--color-white);
-    }
-
-    &:disabled {
-      cursor: default;
-    }
-
-    &--active {
-      border-color: var(--color-white);
-    }
-  }
-
   &__divider {
+
     background: var(--color-border);
+
     height: 1px;
+
   }
 
   &__permissions {
@@ -419,9 +377,12 @@ const handleClosed = () => {
     transition: color 0.2s ease;
 
     &:hover {
+
       color: var(--color-white);
+
+      };
+
     }
-  }
 
   &__group-list {
     display: grid;

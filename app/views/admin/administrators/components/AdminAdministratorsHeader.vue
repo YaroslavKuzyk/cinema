@@ -1,23 +1,23 @@
 <template>
   <div class="admin-admins-header">
     <div class="admin-admins-header__text">
-      <h1>{{ $t('ADMIN_ADMINS_TITLE') }}</h1>
-      <p>{{ $t('ADMIN_ADMINS_SUBTITLE') }}</p>
+      <h1>{{ $t("ADMIN_ADMINS_TITLE") }}</h1>
+      <p>{{ $t("ADMIN_ADMINS_SUBTITLE") }}</p>
     </div>
     <div class="admin-admins-header__actions">
       <AppButton size="medium" :icon-left="UserPlus" @click="$emit('invite')">
-        {{ $t('ADMIN_ADMINS_INVITE') }}
+        {{ $t("ADMIN_ADMINS_INVITE") }}
       </AppButton>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { UserPlus } from 'lucide-vue-next'
+import { UserPlus } from "lucide-vue-next";
 
 defineEmits<{
-  invite: []
-}>()
+  invite: [];
+}>();
 </script>
 
 <style lang="scss" scoped>
@@ -25,7 +25,6 @@ defineEmits<{
   align-items: center;
   display: flex;
   justify-content: space-between;
-  padding-bottom: var(--spacing-lg);
 
   &__text {
     display: flex;
@@ -34,12 +33,16 @@ defineEmits<{
 
     h1 {
       @include FluidFontH2;
+
       color: var(--color-white);
+
     }
 
     p {
       @include FluidFontBodySm;
+
       color: var(--color-text-secondary);
+
     }
   }
 

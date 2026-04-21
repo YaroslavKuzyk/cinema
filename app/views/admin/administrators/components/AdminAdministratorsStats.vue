@@ -77,23 +77,35 @@ defineProps<{
     width: fluid(40px, 48px);
 
     &--red {
+
       background: var(--color-primary-bg);
+
       color: var(--color-primary);
+
     }
 
     &--green {
+
       background: var(--color-success-bg);
+
       color: var(--color-success);
+
     }
 
     &--purple {
+
       background: var(--color-purple-bg);
+
       color: var(--color-purple);
+
     }
 
     &--yellow {
+
       background: var(--color-warning-bg);
+
       color: var(--color-warning);
+
     }
   }
 
@@ -111,7 +123,9 @@ defineProps<{
 
   &__label {
     @include FluidFontCaption;
+
     color: var(--color-text-secondary);
+
   }
 }
 </style>

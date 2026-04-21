@@ -1,5 +1,5 @@
 <template>
-  <div class="app-table">
+  <div class="app-table" :class="{ 'app-table--has-pagination': $slots.pagination }">
     <div class="app-table__wrapper">
       <table class="app-table__table">
         <thead class="app-table__head">
@@ -14,10 +14,22 @@
               v-for="column in props.columns"
               :key="column.key"
               class="app-table__cell app-table__cell--header"
-              :class="[`app-table__cell--${column.align || 'left'}`]"
+              :class="[
+                `app-table__cell--${column.align || 'left'}`,
+                { 'app-table__cell--sortable': column.sortable },
+                { 'app-table__cell--sorted': props.sortBy?.key === column.key },
+              ]"
               :style="{ width: column.width }"
+              @click="column.sortable ? handleSort(column.key) : undefined"
             >
-              {{ column.label }}
+              <span class="app-table__header-content">
+                {{ column.label }}
+                <span v-if="column.sortable" class="app-table__sort-icon">
+                  <ArrowUpDown v-if="props.sortBy?.key !== column.key" :size="14" />
+                  <ArrowUp v-else-if="props.sortBy?.direction === 'asc'" :size="14" />
+                  <ArrowDown v-else :size="14" />
+                </span>
+              </span>
             </th>
           </tr>
         </thead>
@@ -40,9 +52,11 @@
               class="app-table__cell"
               :class="[`app-table__cell--${column.align || 'left'}`]"
             >
-              <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]" :index="index">
-                {{ row[column.key] }}
-              </slot>
+              <div class="app-table__cell-content" :class="[`app-table__cell-content--${column.align || 'left'}`]">
+                <slot :name="`cell-${column.key}`" :row="row" :value="row[column.key]" :index="index">
+                  {{ row[column.key] }}
+                </slot>
+              </div>
             </td>
           </tr>
           <tr v-if="props.data.length === 0" class="app-table__row app-table__row--empty">
@@ -64,8 +78,9 @@
 </template>
 
 <script setup lang="ts">
-import type { IProps } from "./index.types";
+import type { IProps, ISortState } from "./index.types";
 import AppCheckbox from "../AppCheckbox/index.vue";
+import { ArrowUpDown, ArrowUp, ArrowDown } from "lucide-vue-next";
 
 const props = withDefaults(defineProps<IProps>(), {
   selectable: false,
@@ -73,11 +88,22 @@ const props = withDefaults(defineProps<IProps>(), {
   rowKey: "id",
   loading: false,
   emptyText: "Немає даних",
+  sortBy: null,
 });
 
 const emit = defineEmits<{
   "update:selectedRows": [value: (string | number)[]];
+  "update:sortBy": [value: ISortState];
 }>();
+
+const handleSort = (key: string) => {
+  if (props.sortBy?.key === key) {
+    const nextDirection = props.sortBy.direction === 'asc' ? 'desc' : 'asc';
+    emit("update:sortBy", { key, direction: nextDirection });
+  } else {
+    emit("update:sortBy", { key, direction: 'asc' });
+  }
+};
 
 const getRowKey = (row: Record<string, unknown>, index: number): string | number => {
   return (row[props.rowKey] as string | number) ?? index;
@@ -115,20 +141,48 @@ const toggleSelectAll = () => {
 .app-table {
   width: 100%;
 
+  &--has-pagination &__wrapper {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
   &__wrapper {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-md);
-    overflow: hidden;
+    max-height: 70vh;
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--color-white-15);
+      border-radius: var(--radius-full);
+
+      &:hover {
+        background: var(--color-white-20);
+      }
+    }
   }
 
   &__table {
     border-collapse: collapse;
+    min-width: 100%;
     width: 100%;
   }
 
   &__head {
     background: var(--color-surface-alt);
+    position: sticky;
+    top: 0;
+    z-index: 2;
   }
 
   &__row {
@@ -157,6 +211,7 @@ const toggleSelectAll = () => {
     color: var(--color-text-primary);
     padding: var(--spacing-sm) var(--spacing-md);
     vertical-align: middle;
+    white-space: nowrap;
 
     &--header {
       @include FluidFontCaption;
@@ -164,6 +219,19 @@ const toggleSelectAll = () => {
       font-weight: 600;
       letter-spacing: fluid(0.5px, 1px);
       text-transform: uppercase;
+    }
+
+    &--sortable {
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        color: var(--color-text-primary);
+      }
+    }
+
+    &--sorted {
+      color: var(--color-white);
     }
 
     &--checkbox {
@@ -174,14 +242,26 @@ const toggleSelectAll = () => {
 
     &--left {
       text-align: left;
+
+      .app-table__header-content {
+        justify-content: flex-start;
+      }
     }
 
     &--center {
       text-align: center;
+
+      .app-table__header-content {
+        justify-content: center;
+      }
     }
 
     &--right {
       text-align: right;
+
+      .app-table__header-content {
+        justify-content: flex-end;
+      }
     }
 
     &--empty {
@@ -191,8 +271,40 @@ const toggleSelectAll = () => {
     }
   }
 
+  &__cell-content {
+    align-items: center;
+    display: flex;
+
+    &--left {
+      justify-content: flex-start;
+    }
+
+    &--center {
+      justify-content: center;
+    }
+
+    &--right {
+      justify-content: flex-end;
+    }
+  }
+
+  &__header-content {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-2xs);
+  }
+
+  &__sort-icon {
+    color: var(--color-text-tertiary);
+    display: flex;
+  }
+
   &__pagination {
-    margin-top: var(--spacing-base);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    border-top: none;
+    padding: var(--spacing-sm) var(--spacing-md);
   }
 }
 </style>

@@ -32,12 +32,16 @@ defineEmits<{
 
     h1 {
       @include FluidFontH2;
+
       color: var(--color-white);
+
     }
 
     p {
       @include FluidFontBodySm;
+
       color: var(--color-text-secondary);
+
     }
   }
 }

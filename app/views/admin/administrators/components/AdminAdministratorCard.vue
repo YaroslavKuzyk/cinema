@@ -113,8 +113,11 @@ const roleIconComponent = computed(() => {
   }
 
   &__avatar-wrapper {
+
     flex-shrink: 0;
+
     position: relative;
+
   }
 
   &__status-dot {
@@ -135,9 +138,12 @@ const roleIconComponent = computed(() => {
     }
 
     &--offline {
+
       background: var(--color-text-tertiary);
+
+      };
+
     }
-  }
 
   &__identity {
     display: flex;
@@ -187,7 +193,9 @@ const roleIconComponent = computed(() => {
 
   &__info-label {
     @include FluidFontCaption;
+
     color: var(--color-text-tertiary);
+
   }
 
   &__info-value {
@@ -195,8 +203,11 @@ const roleIconComponent = computed(() => {
     color: var(--color-text-secondary);
 
     &--online {
+
       color: var(--color-success);
+
       font-weight: 600;
+
     }
   }
 

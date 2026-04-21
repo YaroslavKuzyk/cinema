@@ -122,8 +122,11 @@ const handleConfirm = () => {
     padding: var(--spacing-sm) var(--spacing-md);
 
     svg {
+
       flex-shrink: 0;
+
       margin-top: 2px;
+
     }
   }
 }

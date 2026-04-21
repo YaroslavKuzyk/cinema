@@ -1,0 +1,8 @@
+export { default as AdminSettingsHeader } from './AdminSettingsHeader.vue'
+export { default as AdminSettingsSidebar } from './AdminSettingsSidebar.vue'
+export { default as AdminSettingsGeneral } from './AdminSettingsGeneral.vue'
+export { default as AdminSettingsAppearance } from './AdminSettingsAppearance.vue'
+export { default as AdminSettingsNotifications } from './AdminSettingsNotifications.vue'
+export { default as AdminSettingsPlayer } from './AdminSettingsPlayer.vue'
+export { default as AdminSettingsSecurity } from './AdminSettingsSecurity.vue'
+export { default as AdminSettingsDangerZone } from './AdminSettingsDangerZone.vue'

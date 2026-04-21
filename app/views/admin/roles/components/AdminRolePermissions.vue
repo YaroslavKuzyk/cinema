@@ -71,9 +71,12 @@ defineProps<{
     gap: var(--spacing-xs);
 
     &--disabled {
+
       color: var(--color-text-tertiary);
+
+      };
+
     }
-  }
 
 }
 </style>

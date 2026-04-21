@@ -84,8 +84,11 @@ const updateField = (field: keyof IAdminAccountPersonalInfo, value: string) => {
   gap: var(--spacing-md);
 
   &__row {
+
     display: flex;
+
     gap: var(--spacing-md);
+
   }
 
   &__actions {

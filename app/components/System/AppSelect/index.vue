@@ -13,7 +13,8 @@
         :disabled="props.disabled"
         @click="toggle"
       >
-        <span class="app-select__value">
+        <span class="app-select__value" :class="{ 'app-select__value--placeholder': !displayValue }">
+          <span v-if="props.prefix && displayValue" class="app-select__prefix">{{ props.prefix }}:</span>
           {{ displayValue || props.placeholder }}
         </span>
         <ChevronDown
@@ -23,7 +24,7 @@
         />
       </button>
       <Teleport to="body">
-        <Transition name="dropdown">
+        <Transition :name="dropdownDirection === 'up' ? 'dropdown-up' : 'dropdown'">
           <div
             v-if="isOpen"
             ref="dropdownRef"
@@ -77,6 +78,7 @@ const props = withDefaults(defineProps<IProps>(), {
   itemTitle: "title",
   itemValue: "value",
   fullObject: false,
+  prefix: "",
 });
 
 const emit = defineEmits<IEmits>();
@@ -166,12 +168,23 @@ const isSelected = (option: IOption): boolean => {
   return compareValues(props.modelValue as IValue, optionValue);
 };
 
+const dropdownDirection = ref<'down' | 'up'>('down');
+
 const updateDropdownPosition = () => {
   if (!triggerRef.value) return;
   const rect = triggerRef.value.getBoundingClientRect();
+  const dropdownHeight = dropdownRef.value?.offsetHeight || 200;
+  const spaceBelow = window.innerHeight - rect.bottom;
+  const spaceAbove = rect.top;
+
+  const openUp = spaceBelow < dropdownHeight + 8 && spaceAbove > spaceBelow;
+  dropdownDirection.value = openUp ? 'up' : 'down';
+
   dropdownStyle.value = {
     position: "fixed",
-    top: `${rect.bottom + 4}px`,
+    ...(openUp
+      ? { bottom: `${window.innerHeight - rect.top + 4}px` }
+      : { top: `${rect.bottom + 4}px` }),
     left: `${rect.left}px`,
     width: `${rect.width}px`,
     zIndex: "9999",
@@ -279,6 +292,15 @@ onUnmounted(() => {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    &--placeholder {
+      color: var(--color-text-tertiary);
+    }
+  }
+
+  &__prefix {
+    color: var(--color-text-secondary);
+    margin-right: var(--spacing-3xs);
   }
 
   &__arrow {
@@ -348,5 +370,18 @@ onUnmounted(() => {
 .dropdown-leave-to {
   opacity: 0;
   transform: translateY(calc(var(--spacing-xs) * -1));
+}
+
+.dropdown-up-enter-active,
+.dropdown-up-leave-active {
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.dropdown-up-enter-from,
+.dropdown-up-leave-to {
+  opacity: 0;
+  transform: translateY(var(--spacing-xs));
 }
 </style>

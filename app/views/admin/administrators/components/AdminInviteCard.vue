@@ -32,8 +32,11 @@ defineEmits<{
   transition: all 0.3s ease;
 
   &:hover {
+
     background: var(--color-white-5);
+
     border-color: var(--color-text-secondary);
+
   }
 
   &__icon {

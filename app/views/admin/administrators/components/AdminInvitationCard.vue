@@ -127,7 +127,9 @@ const isNearExpiry = computed(() => {
 
   &__info-label {
     @include FluidFontCaption;
+
     color: var(--color-text-tertiary);
+
   }
 
   &__info-value {
@@ -135,8 +137,11 @@ const isNearExpiry = computed(() => {
     color: var(--color-text-secondary);
 
     &--expired {
+
       color: var(--color-primary);
+
       font-weight: 600;
+
     }
   }
 

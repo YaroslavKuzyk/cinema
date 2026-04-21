@@ -12,6 +12,7 @@ export interface IProps {
   itemTitle?: string;
   itemValue?: string;
   fullObject?: boolean;
+  prefix?: string;
 }
 
 

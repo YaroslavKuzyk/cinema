@@ -111,9 +111,12 @@ const formatNumber = (num: number) => {
     gap: var(--spacing-md);
 
     span {
+
       color: var(--color-text-tertiary);
+
+      };
+
     }
-  }
 
   &__stats {
     align-items: center;
@@ -128,12 +131,16 @@ const formatNumber = (num: number) => {
 
     p {
       @include FluidShadowLg;
+
       font-weight: 900;
+
     }
 
     span {
       @include FluidFontBodySm;
+
       color: var(--color-text-tertiary);
+
     }
   }
 }

@@ -1,0 +1,5 @@
+export { default as AdminSeriesHeader } from './AdminSeriesHeader.vue'
+export { default as AdminSeriesStats } from './AdminSeriesStats.vue'
+export { default as AdminSeriesFilters } from './AdminSeriesFilters.vue'
+export { default as AdminSeriesBulkActions } from './AdminSeriesBulkActions.vue'
+export { default as AdminSeriesTable } from './AdminSeriesTable.vue'

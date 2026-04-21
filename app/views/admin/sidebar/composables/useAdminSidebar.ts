@@ -8,6 +8,8 @@ import {
   UserCog,
   Circle,
   Settings,
+  CreditCard,
+  Receipt,
 } from 'lucide-vue-next'
 import type { IAdminNavigationGroup, IAdminUserInfo } from '../domain'
 
@@ -36,6 +38,8 @@ export function useAdminSidebar() {
       items: [
         { to: '/admin/administrators', label: t('ADMIN_SIDEBAR_ADMINISTRATORS'), icon: UserCog },
         { to: '/admin/roles', label: t('ADMIN_SIDEBAR_ROLES'), icon: Circle },
+        { to: '/admin/plans', label: t('ADMIN_SIDEBAR_PLANS'), icon: CreditCard },
+        { to: '/admin/transactions', label: t('ADMIN_SIDEBAR_TRANSACTIONS'), icon: Receipt },
         { to: '/admin/settings', label: t('ADMIN_SIDEBAR_SETTINGS'), icon: Settings },
       ],
     },

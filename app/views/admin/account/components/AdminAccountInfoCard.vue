@@ -64,7 +64,9 @@ defineProps<Props>()
 
   &__label {
     @include FluidFontBodySm;
+
     color: var(--color-text-tertiary);
+
   }
 
   &__value {
@@ -81,8 +83,11 @@ defineProps<Props>()
     }
 
     &--mono {
+
       font-family: monospace;
+
       letter-spacing: 0.05em;
+
     }
   }
 }

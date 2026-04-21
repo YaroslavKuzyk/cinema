@@ -7,6 +7,7 @@
       `app-button--${props.size}`,
       { 'app-button--loading': props.loading },
       { 'app-button--disabled': props.disabled },
+      { 'app-button--square': props.square },
     ]"
     :disabled="isButton ? props.disabled : undefined"
     :to="props.as === 'nuxt-link' ? props.to : undefined"
@@ -34,6 +35,7 @@ const props = withDefaults(defineProps<IProps>(), {
   loading: false,
   disabled: false,
   as: "button",
+  square: false,
 });
 
 const isButton = computed(() => props.as === "button");
@@ -128,6 +130,11 @@ const getLoaderSize = computed(() => {
     @include FluidFontBodyMd;
     border-radius: var(--radius-lg);
     padding: var(--spacing-sm) var(--spacing-2xl);
+  }
+
+  &--square {
+    aspect-ratio: 1;
+    padding: var(--spacing-xs);
   }
 
   &--disabled {
