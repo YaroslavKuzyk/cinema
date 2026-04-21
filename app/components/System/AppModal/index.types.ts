@@ -5,4 +5,5 @@ export interface IProps {
   size?: "small" | "medium" | "large" | "xlarge" | "full";
   closable?: boolean;
   closeOnOverlay?: boolean;
+  flush?: boolean;
 }

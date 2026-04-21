@@ -8,7 +8,13 @@
     :esc-to-close="props.closable"
     @closed="emit('closed')"
   >
-    <div class="app-modal__content" :class="[`app-modal__content--${props.size}`]">
+    <div
+      class="app-modal__content"
+      :class="[
+        `app-modal__content--${props.size}`,
+        { 'app-modal__content--flush': props.flush },
+      ]"
+    >
       <button
         v-if="props.closable"
         class="app-modal__close"
@@ -24,7 +30,9 @@
 
       <h2 v-if="props.title" class="app-modal__title">{{ props.title }}</h2>
 
-      <p v-if="props.description" class="app-modal__description">{{ props.description }}</p>
+      <p v-if="props.description" class="app-modal__description">
+        {{ props.description }}
+      </p>
 
       <div v-if="$slots.default" class="app-modal__body">
         <slot />
@@ -74,7 +82,7 @@ const isOpen = computed({
     align-items: center;
     display: flex;
     justify-content: center;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-sm);
     width: 100%;
   }
 
@@ -82,9 +90,10 @@ const isOpen = computed({
     background: var(--color-surface);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
-    max-height: 90vh;
+    max-height: 80vh;
     overflow-y: auto;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
+    padding-top: var(--spacing-2xl);
     position: relative;
     width: 100%;
 
@@ -105,7 +114,15 @@ const isOpen = computed({
     }
 
     &--full {
-      max-width: 1100px;
+      max-width: 80vw;
+    }
+
+    &--flush {
+      padding: 0;
+
+      .app-modal__body {
+        margin-top: 0;
+      }
     }
   }
 
@@ -124,6 +141,7 @@ const isOpen = computed({
     top: var(--spacing-sm);
     transition: all 0.2s ease;
     width: var(--spacing-xl);
+    z-index: 2;
 
     &:hover {
       background: var(--color-background-hover);

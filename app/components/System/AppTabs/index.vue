@@ -81,11 +81,7 @@ provide(APP_TABS_INJECTION_KEY, toRef(() => props.modelValue));
     display: flex;
 
     &--pill {
-      background-color: var(--color-surface);
-      border: 1px solid var(--color-divider);
-      border-radius: var(--radius-md);
       gap: var(--spacing-2xs);
-      padding: var(--spacing-2xs);
     }
 
     &--underline {

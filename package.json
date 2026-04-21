@@ -6,8 +6,5 @@
   },
   "devDependencies": {
     "husky": "^9.1.0"
-  },
-  "dependencies": {
-    "@vuepic/vue-datepicker": "^12.1.0"
   }
 }
