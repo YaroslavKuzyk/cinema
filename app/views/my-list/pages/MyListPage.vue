@@ -44,6 +44,8 @@ useHead({
   title: 'Cinema — Мій список',
 })
 
+useListingCanonical()
+
 const { activeFilter, continueWatching, filteredSaved, filterOptions, stats } = useMyList()
 const { open } = useMediaModal()
 const mocks = useMediaMocks()

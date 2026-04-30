@@ -1,0 +1,6 @@
+export { default as PlayerHeader } from './PlayerHeader.vue'
+export { default as PlayerControls } from './PlayerControls.vue'
+export { default as PlayerNextEpisode } from './PlayerNextEpisode.vue'
+export { default as PlayerScrubPreview } from './PlayerScrubPreview.vue'
+export { default as PlayerSettingsPanel } from './PlayerSettingsPanel.vue'
+export { default as PlayerEpisodesPanel } from './PlayerEpisodesPanel.vue'

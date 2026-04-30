@@ -18,14 +18,28 @@
       </nav>
 
       <div class="public-header__actions">
-        <button type="button" class="public-header__search" :aria-label="$t('HOME_HEADER_SEARCH')">
-          <Search :size="16" />
-          <span>{{ $t('HOME_HEADER_SEARCH') }}</span>
-        </button>
+        <form
+          class="public-header__search"
+          :class="{ 'public-header__search--expanded': isFocused || query.length > 0 }"
+          role="search"
+          @submit.prevent="onSubmit"
+        >
+          <Search :size="14" class="public-header__search-icon" />
+          <input
+            ref="inputEl"
+            v-model="query"
+            type="search"
+            class="public-header__search-field"
+            :placeholder="$t('HOME_HEADER_SEARCH')"
+            :aria-label="$t('HOME_HEADER_SEARCH')"
+            @focus="isFocused = true"
+            @blur="isFocused = false"
+          >
+        </form>
 
-        <button type="button" class="public-header__avatar" :aria-label="$t('HOME_HEADER_PROFILE')">
-          ЯК
-        </button>
+        <NuxtLink to="/account" class="public-header__avatar" :aria-label="$t('HOME_HEADER_PROFILE')">
+          <AppAvatar size="small" initials="ЯК" />
+        </NuxtLink>
       </div>
     </div>
   </header>
@@ -36,6 +50,8 @@ import { Search } from 'lucide-vue-next'
 import LogoIcon from '~/icons/LogoIcon.vue'
 
 const route = useRoute()
+const router = useRouter()
+const localePath = useLocalePath()
 const { items } = useMainNavigation()
 
 const activeKey = computed(() => {
@@ -43,6 +59,17 @@ const activeKey = computed(() => {
   const withoutLocale = '/' + segments.slice(1).join('/')
   return items.value.find(i => i.to === withoutLocale)?.key ?? 'home'
 })
+
+const inputEl = ref<HTMLInputElement | null>(null)
+const isFocused = ref(false)
+const query = ref<string>(route.path.endsWith('/search') ? String(route.query.q ?? '') : '')
+
+function onSubmit() {
+  const q = query.value.trim()
+  router.push({ path: localePath('/search'), query: q ? { q } : {} })
+  query.value = ''
+  inputEl.value?.blur()
+}
 </script>
 
 <style lang="scss" scoped>
@@ -57,14 +84,16 @@ const activeKey = computed(() => {
 
   &__inner {
     align-items: center;
-    display: flex;
+    display: grid;
     gap: var(--spacing-xl);
+    grid-template-columns: 1fr auto 1fr;
     width: 100%;
   }
 
   &__logo {
     align-items: center;
     display: flex;
+    justify-self: start;
 
     :deep(svg) {
       height: 34px;
@@ -74,9 +103,9 @@ const activeKey = computed(() => {
 
   &__nav {
     display: flex;
-    flex: 1;
     gap: var(--spacing-lg);
     justify-content: center;
+    justify-self: center;
   }
 
   &__link {
@@ -111,45 +140,70 @@ const activeKey = computed(() => {
     align-items: center;
     display: flex;
     gap: var(--spacing-sm);
+    justify-self: end;
   }
 
   &__search {
-    @include FluidFontBodySm;
     align-items: center;
     backdrop-filter: blur(6px);
     background: rgba(var(--color-white-rgb), 0.08);
     border: 1px solid rgba(var(--color-white-rgb), 0.12);
-    border-radius: var(--radius-full);
-    color: var(--color-text-secondary);
-    cursor: pointer;
+    border-radius: var(--radius-sm);
     display: inline-flex;
-    gap: var(--spacing-xs);
-    padding: var(--spacing-2xs) var(--spacing-base);
-    transition: all 0.2s ease;
+    gap: var(--spacing-2xs);
+    height: fluid(40px, 48px);
+    padding: 0 var(--spacing-sm);
+    transition:
+      width 0.3s ease,
+      background 0.2s ease,
+      border-color 0.2s ease;
+    width: 180px;
 
     &:hover {
       background: rgba(var(--color-white-rgb), 0.14);
       border-color: var(--color-white-20);
-      color: var(--color-white);
+    }
+
+    &--expanded {
+      background: rgba(var(--color-white-rgb), 0.14);
+      border-color: var(--color-primary);
+      width: 320px;
+    }
+  }
+
+  &__search-icon {
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+  }
+
+  &__search-field {
+    @include FluidFontBodySm;
+    background: transparent;
+    border: none;
+    color: var(--color-white);
+    flex: 1;
+    height: 100%;
+    min-width: 0;
+    outline: none;
+    padding: 0;
+
+    &::placeholder {
+      color: var(--color-text-secondary);
+    }
+
+    &::-webkit-search-cancel-button {
+      display: none;
     }
   }
 
   &__avatar {
-    @include FluidFontLabel;
     align-items: center;
-    background: var(--color-primary);
-    border: none;
-    border-radius: var(--radius-sm);
-    color: var(--color-white);
-    cursor: pointer;
     display: inline-flex;
-    height: 34px;
-    justify-content: center;
-    transition: background 0.2s ease;
-    width: 34px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
 
     &:hover {
-      background: var(--color-primary-hover);
+      opacity: 0.85;
     }
   }
 }

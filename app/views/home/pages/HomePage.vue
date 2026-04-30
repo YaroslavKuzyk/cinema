@@ -42,6 +42,8 @@ import PublicMovieRow from '~/components/Public/MovieRow/index.vue'
 import PublicGenresRow from '~/components/Public/GenresRow/index.vue'
 import { useHome } from '../composables'
 
+useListingCanonical()
+
 const { featured, continueWatching, popular, topTen, genres } = useHome()
 const { open } = useMediaModal()
 const mocks = useMediaMocks()

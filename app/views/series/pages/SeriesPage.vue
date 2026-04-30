@@ -41,6 +41,8 @@ useHead({
   title: 'Cinema — Серіали',
 })
 
+useListingCanonical()
+
 const { activeFilter, featured, filterTabs, rows, genres } = useSeries()
 const { open } = useMediaModal()
 const mocks = useMediaMocks()

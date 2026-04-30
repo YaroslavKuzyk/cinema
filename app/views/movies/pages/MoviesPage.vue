@@ -41,6 +41,8 @@ useHead({
   title: 'Cinema — Фільми',
 })
 
+useListingCanonical()
+
 const { activeFilter, featured, filterTabs, rows, genres } = useMovies()
 const { open } = useMediaModal()
 const mocks = useMediaMocks()

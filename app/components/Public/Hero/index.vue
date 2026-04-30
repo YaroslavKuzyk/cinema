@@ -14,7 +14,13 @@
       <p class="public-hero__description">{{ featured.description }}</p>
 
       <div class="public-hero__actions">
-        <AppButton variant="primary" size="large" :icon-left="Play">
+        <AppButton
+          variant="primary"
+          size="large"
+          :icon-left="Play"
+          as="nuxt-link"
+          :to="watchLink"
+        >
           {{ $t('HOME_HERO_WATCH') }}
         </AppButton>
         <button type="button" class="public-hero__ghost">
@@ -40,7 +46,10 @@
 import { Play, Plus, Star } from 'lucide-vue-next'
 import type { IHeroProps } from './index.types'
 
-defineProps<IHeroProps>()
+const props = defineProps<IHeroProps>()
+
+const localePath = useLocalePath()
+const watchLink = computed(() => localePath(`/watch/${props.featured.id}`))
 </script>
 
 <style lang="scss" scoped>
@@ -90,7 +99,12 @@ defineProps<IHeroProps>()
     color: #ff6068;
     display: inline-flex;
     gap: var(--spacing-3xs);
+    line-height: 1;
     padding: 4px var(--spacing-xs);
+
+    :deep(svg) {
+      display: block;
+    }
   }
 
   &__title {
